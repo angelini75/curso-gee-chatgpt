@@ -3,22 +3,24 @@
     "path": "C:/GIT/curso-gee-chatgpt/_bookdown.yml",
     "project_path": "_bookdown.yml",
     "type": "yaml",
-    "hash": "0",
+    "hash": "3952431939",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1734643358767.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "3,29",
+        "scrollLine": "0"
     },
     "folds": "",
     "lastKnownWriteTime": 1734643349,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1734643349,
+    "last_content_update": 1734647888544,
     "read_only": false,
     "read_only_alternatives": []
 }

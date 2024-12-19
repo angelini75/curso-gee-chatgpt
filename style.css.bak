@@ -1,0 +1,135 @@
+/* General Body Style */
+body {
+  font-family: 'Georgia', serif; /* Tipografía serif elegante */
+  line-height: 1.8;
+  background-color: #fdfdfd; /* Fondo blanco suave */
+  color: #333; /* Texto principal */
+  margin: 0;
+  padding: 0;
+}
+
+/* Títulos y Cabeceras */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Georgia', serif; /* Tipografía consistente para títulos */
+  font-weight: bold;
+  color: #9F393D; /* Color principal para títulos */
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.6em;
+  border-bottom: 2px solid #9F393D; /* Línea decorativa */
+  padding-bottom: 5px;
+}
+
+h2 {
+  font-size: 2em;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 4px;
+}
+
+h3 {
+  font-size: 1.6em;
+  color: #7A2F31; /* Tono más oscuro derivado del color principal */
+}
+
+/* Párrafos */
+p {
+  font-size: 1rem;
+  margin: 0 0 1.5em;
+  color: #555;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'Georgia', serif;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background-color: #9F393D; /* Fondo para encabezados */
+  color: #fff; /* Texto en encabezados */
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternancia de colores para filas */
+}
+
+/* Bloques de Código */
+pre {
+  background: #282828; /* Fondo oscuro para contraste */
+  color: #F5F5F5; /* Texto claro */
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+pre code {
+  color: inherit;
+}
+
+p code {
+  background-color: #FBECEC; /* Fondo suave derivado del color principal */
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+/* Citas */
+blockquote {
+  border-left: 4px solid #9F393D;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  font-style: italic;
+  color: #555;
+  background-color: #FDF6F6;
+}
+
+/* Enlaces */
+a {
+  color: #9F393D;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #7A2F31;
+  text-decoration: underline;
+}
+
+/* Imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+/* Listas */
+ul, ol {
+  margin: 10px 0 10px 20px;
+}
+
+ul li, ol li {
+  margin: 5px 0;
+}
+
+/* Pie de Página */
+footer {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 0.8em;
+  color: #777;
+}
