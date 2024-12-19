@@ -3,6 +3,7 @@ language:
   ui:
     chapter_name: "Capítulo "
 new_session: yes
+output_dir: "docs"
 rmd_files:
   - index.Rmd
   - 01-introduccion.Rmd
@@ -12,3 +13,4 @@ rmd_files:
   - 05-clasificacion-supervisada.Rmd
   - 06-fenomenos-estacionales.Rmd
   - 07-evaluacion.Rmd
+

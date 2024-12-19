@@ -1,7 +1,7 @@
 ---
 title: "Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales"
 author: "Dr. Marcos E. Angelini"
-date: "`r Sys.Date()`"
+date: "2024-12-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -44,5 +44,7 @@ Esperamos que este curso te proporcione las herramientas necesarias para integra
 Para renderizar este libro:
 1. Ve al panel **Build** en RStudio y selecciona **Build Book**.
 2. Alternativamente, desde la consola de R ejecuta:
-   ```{r, eval=FALSE}
+   
+   ``` r
    bookdown::render_book()
+   ```
