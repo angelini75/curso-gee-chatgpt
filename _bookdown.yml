@@ -5,7 +5,7 @@ language:
     fig: "Figura " # Cambia "Figure" por "Figura"
     tab: "Tabla "  # Cambia "Table" por "Tabla"
 new_session: yes
-output_dir: "doc"     
+output_dir: "docs"     
 
 rmd_files:
   - index.Rmd
