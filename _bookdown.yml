@@ -2,15 +2,7 @@ delete_merged_file: true
 language:
   ui:
     chapter_name: "Capítulo "
+    fig: "Figura " # Cambia "Figure" por "Figura"
+    tab: "Tabla "  # Cambia "Table" por "Tabla"
 new_session: yes
-output_dir: "docs"
-rmd_files:
-  - index.Rmd
-  - 01-introduccion.Rmd
-  - 02-javascript-y-gee.Rmd
-  - 03-ingenieria-de-prompts.Rmd
-  - 04-deteccion-cambios.Rmd
-  - 05-clasificacion-supervisada.Rmd
-  - 06-fenomenos-estacionales.Rmd
-  - 07-evaluacion.Rmd
 

@@ -3,11 +3,12 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Curso de Google Earth Engine</a></li>
+        <li><a href="./">Uso de Google Earth Engine</a></li>
       after: |
-        <li><a href="https://github.com/angelini75/curso-gee-chatgpt" target="blank">Publicado con bookdown</a></li>
-    edit: https://github.com/angelini75/curso-gee-chatgpt/edit/main/%s
+        <li><a href="https://github.com/angelini75/curso-gee-chatgpt" target="blank">Publicado con Bookdown</a></li>
     download: ["pdf", "epub"]
+  metadata:
+    title: "Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales"
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

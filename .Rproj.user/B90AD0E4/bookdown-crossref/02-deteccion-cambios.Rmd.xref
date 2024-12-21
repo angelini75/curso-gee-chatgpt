@@ -1,0 +1,47 @@
+h1:análisis-multitemporal-para-la-detección-de-cambios Análisis multitemporal para la detección de cambios
+h2:pasos-para-el-análisis-multitemporal Pasos para el análisis multitemporal
+h3:definir-la-región-de-interés-roi 1. Definir la región de interés (ROI)
+h3:seleccionar-las-colecciones-de-imágenes-adecuadas 2. Seleccionar las colecciones de imágenes adecuadas
+h3:aplicar-filtros-temporales-y-espaciales 3. Aplicar filtros temporales y espaciales
+h3:preprocesamiento-de-las-imágenes 4. Preprocesamiento de las imágenes
+h3:calcular-índices-o-métricas-relevantes 5. Calcular índices o métricas relevantes
+h3:generar-composiciones-temporales 6. Generar composiciones temporales
+h3:analizar-y-visualizar-los-resultados 7. Analizar y visualizar los resultados
+h3:validación-y-verificación 8. Validación y verificación
+h2:análisis-multitemporal-de-incendios-en-córdoba-2020-usando-chatgpt-y-google-earth-engine Análisis multitemporal de incendios en Córdoba (2020) usando ChatGPT y Google Earth Engine
+h3:objetivo-general Objetivo general
+h3:instrucciones-generales-para-los-estudiantes Instrucciones generales para los estudiantes
+h3:prompt-inicial-para-chatgpt Prompt inicial para ChatGPT
+h4:explicación-del-prompt Explicación del Prompt
+h4:resultado-del-prompt Resultado del prompt
+h3:paso-1-definir-la-región-de-interés-roi-siguiendo-la-metodología-paso-a-paso. Paso 1: Definir la región de interés (ROI), siguiendo la metodología paso a paso.
+h4:prompt-para-chatgpt---paso-1 Prompt para ChatGPT - Paso 1
+h4:respuesta-esperada-de-chatgpt Respuesta esperada de ChatGPT
+h3:paso-2-seleccionar-imágenes-modis-antes-y-después-de-los-incendios Paso 2: Seleccionar imágenes MODIS antes y después de los incendios
+h4:respuesta-esperada-de-chatgpt-1 Respuesta esperada de ChatGPT
+h4:explicación-del-código-para-el-paso-2-selección-de-imágenes-modis-y-recorte-al-roi Explicación del Código para el Paso 2: Selección de Imágenes MODIS y Recorte al ROI
+h3:paso-3-calcular-el-índice-nbr-normalized-burn-ratio Paso 3: Calcular el Índice NBR (Normalized Burn Ratio)
+h4:prompt-para-chatgpt---paso-3 Prompt para ChatGPT - Paso 3
+h4:código-generado-para-el-paso-3 Código Generado para el Paso 3
+h4:explicación-del-código-para-el-paso-3-calcular-el-índice-de-quemadura-normalizada-nbr Explicación del Código para el Paso 3: Calcular el Índice de Quemadura Normalizada (NBR)
+h3:paso-4-calcular-la-diferencia-de-nbr-dnbr Paso 4: Calcular la Diferencia de NBR (dNBR)
+h4:prompt Prompt:
+h4:explicación-del-código-para-el-paso-4-calcular-la-diferencia-de-nbr-dnbr Explicación del Código para el Paso 4: Calcular la Diferencia de NBR (dNBR)
+h4:componentes-principales-del-código Componentes principales del código:
+h3:paso-5-crear-una-máscara-de-áreas-quemadas Paso 5: Crear una Máscara de Áreas Quemadas
+h4:código-generado-para-el-paso-5 Código Generado para el Paso 5
+h4:explicación-del-código-para-el-paso-5-crear-una-máscara-de-áreas-quemadas Explicación del Código para el Paso 5: Crear una Máscara de Áreas Quemadas
+h4:concepto-del-umbral-threshold Concepto del Umbral (Threshold)
+h4:componentes-del-código Componentes del Código:
+h4:ajustes-del-umbral Ajustes del Umbral
+h4:resultado-esperado Resultado Esperado
+h3:paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)
+h4:objetivo Objetivo
+h4:prompt-para-chatgpt---paso-5-mejorado-con-la-exclusión-de-cuerpos-de-agua Prompt para ChatGPT - Paso 5 (Mejorado con la exclusión de cuerpos de agua)
+h4:resultado-esperado-1 Resultado esperado
+h4:explicación-del-código-para-el-paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua Explicación del Código para el Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)
+h3:paso-7-calcular-la-superficie-total-quemada Paso 7: Calcular la Superficie Total Quemada
+h4:resultado-esperado-2 Resultado esperado
+h4:explicación-del-código-para-el-paso-7-calcular-la-superficie-total-quemada Explicación del Código para el Paso 7: Calcular la Superficie Total Quemada
+h2:preguntas-al-lector Preguntas al lector
+

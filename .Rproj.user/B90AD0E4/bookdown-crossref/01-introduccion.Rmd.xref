@@ -1,4 +1,55 @@
-h1:hello-bookdown Hello bookdown
-h2:a-section A section
-h3:an-unnumbered-section An unnumbered section
+h1:introducción Introducción
+h2:google-earth-engine Google Earth Engine
+h3:qué-es-google-earth-engine ¿Qué es Google Earth Engine?
+h3:creación-de-una-cuenta-en-google-earth-engine Creación de una Cuenta en Google Earth Engine
+h3:creación-de-un-proyecto-en-google-earth-engine Creación de un Proyecto en Google Earth Engine
+h3:consideraciones-adicionales Consideraciones Adicionales
+h3:bondades-de-google-earth-engine Bondades de Google Earth Engine
+h3:partes-esenciales-de-la-plataforma Partes esenciales de la plataforma
+h4:interfaz-de-usuario Interfaz de Usuario
+fig:gee-interface Interfaz principal de Google Earth Engine.
+h4:catálogo-de-datos Catálogo de Datos
+h4:api-de-earth-engine API de Earth Engine
+h4:visualización-interactiva Visualización Interactiva
+h3:por-qué-es-importante-esta-plataforma ¿Por qué es importante esta plataforma?
+h3:condiciones-de-uso Condiciones de uso
+h3:ejemplo-de-las-capacidades-de-gee Ejemplo de las capacidades de GEE
+h2:introducción-a-javascript Introducción a JavaScript
+h3:elementos-básicos-de-un-script-de-javascript Elementos básicos de un script de JavaScript
+fig:script Script de Google Earth Engine.
+h3:entendiendo-la-sintaxis-en-javascript-y-google-earth-engine Entendiendo la sintaxis en JavaScript y Google Earth Engine
+h3:elementos-clave-de-la-sintaxis Elementos clave de la sintaxis
+h3:cómo-leer-un-script Cómo leer un script
+h3:ejemplo-básico-desglosado Ejemplo básico desglosado
+h3:el-uso-de-la-función-print El uso de la función 
+h5:cómo-usar-print Cómo usar 
+h4:ejemplo-de-uso Ejemplo de uso
+h4:depurando-con-print Depurando con 
+h4:por-qué-es-útil-para-principiantes ¿Por qué es útil para principiantes?
+h4:consejo-para-usar-print-eficientemente Consejo para usar  eficientemente
+h3:un-primer-script-en-google-earth-engine Un primer script en Google Earth Engine
+fig:script2 Captura de pantalla del script.
+h4:analizando-el-script Analizando el script
+h4:colores-en-el-editor-de-código-de-gee Colores en el Editor de Código de GEE
+h3:pregunta-para-el-lector Pregunta para el lector
+h3:ejercicio Ejercicio
+h4:pasos-para-crear-un-script-en-gee Pasos para crear un script en GEE
+h4:fragmentos-de-código-para-completar Fragmentos de código para completar
+h4:indicaciones-para-completar-los-fragmentos Indicaciones para completar los fragmentos
+h4:recursos-adicionales Recursos adicionales
+h2:introducción-a-chatgpt Introducción a ChatGPT
+h3:qué-son-los-grandes-modelos-de-lenguaje-llm ¿Qué son los Grandes Modelos de Lenguaje (LLM)?
+h3:creación-de-una-cuenta-en-chatgpt Creación de una Cuenta en ChatGPT
+h3:explorando-la-interfaz-de-chatgpt Explorando la Interfaz de ChatGPT
+fig:chatgpt Interfaz principal de ChatGPT.
+h4:aplicaciones-de-chatgpt-en-programación Aplicaciones de ChatGPT en Programación
+h4:utilidad-de-chatgpt-en-el-contexto-de-este-curso Utilidad de ChatGPT en el Contexto de este Curso
+h3:ingeniería-de-prompts Ingeniería de Prompts
+h4:claridad-y-especificidad Claridad y especificidad
+h4:estrategias-de-contexto-y-formato Estrategias de Contexto y Formato
+h4:definir-el-formato-de-la-respuesta Definir el formato de la respuesta
+h4:iteración-y-refinamiento-del-prompt Iteración y Refinamiento del Prompt
+h4:flujo-de-trabajo-para-la-ingeniería-de-prompts Flujo de Trabajo para la Ingeniería de Prompts
+h4:trucos-avanzados-en-chatgpt Trucos Avanzados en ChatGPT
+h3:preguntas-al-lector Preguntas al lector
 

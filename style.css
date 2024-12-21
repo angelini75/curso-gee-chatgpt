@@ -1,143 +1,77 @@
-/* General Body Style */
-body {
-  font-family: 'Georgia', serif; /* Tipografía serif elegante */
-  line-height: 1.8; /* Espaciado amplio para mejorar la legibilidad */
-  background-color: #ffffff; /* Fondo blanco limpio */
-  color: #333333; /* Texto principal */
-  margin: 0;
-  padding: 0;
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
 }
-
-/* Títulos y Cabeceras */
-h1 {
-  font-size: 2.8em; /* Tamaño grande para títulos principales */
-  color: #9F393D; /* Color rojo elegante */
-  border-bottom: 2px solid #9F393D;
-  padding-bottom: 10px;
-  margin-top: 20px;
+.rmdcaution {
+  background-image: url("../images/caution.png");
 }
-
-h2 {
-  font-size: 2.2em;
-  color: #7A2F31;
-  border-bottom: 1px solid #E5E5E5;
-  padding-bottom: 5px;
-  margin-top: 30px;
+.rmdimportant {
+  background-image: url("../images/important.png");
 }
-
-h3 {
-  font-size: 1.8em;
-  color: #7A2F31;
-  margin-top: 20px;
+.rmdnote {
+  background-image: url("../images/note.png");
 }
-
-h4 {
-  font-size: 1.4em;
-  color: #7A2F31;
+.rmdtip {
+  background-image: url("../images/tip.png");
 }
-
-h5, h6 {
-  font-size: 1.2em;
-  color: #7A2F31;
+.rmdwarning {
+  background-image: url("../images/warning.png");
 }
-
-/* Párrafos */
-p {
-  font-size: 1.1em;
-  margin: 0 0 1.5em;
-  color: #333333;
+p.caption {
+  color: #777;
+  margin-top: 5px;
 }
-
-/* Tablas */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-table th, table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-table th {
-  background-color: #9F393D; /* Fondo rojo para encabezados */
-  color: #ffffff; /* Texto blanco */
-  font-size: 1.1em;
-}
-
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-/* Bloques de Código */
-pre {
-  background: #f5f5f5; /* Fondo claro */
-  color: #333333;
-  padding: 15px;
-  border-radius: 5px;
-  overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95em;
-}
-
-pre code {
-  color: inherit;
-}
-
 p code {
-  background-color: #FBECEC; /* Fondo suave */
-  padding: 2px 5px;
-  border-radius: 3px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95em;
+  white-space: inherit;
 }
-
-/* Citas */
-blockquote {
-  border-left: 5px solid #9F393D;
-  margin: 20px;
-  padding: 10px 20px;
-  font-style: italic;
-  color: #555555;
-  background-color: #f9f9f9;
+pre {
+  word-break: normal;
+  word-wrap: normal;
 }
-
-/* Enlaces */
-a {
-  color: #9F393D;
-  text-decoration: none;
+pre code {
+  white-space: inherit;
 }
-
-a:hover {
-  color: #7A2F31;
-  text-decoration: underline;
+p.flushright {
+  text-align: right;
 }
-
-/* Listas */
-ul, ol {
-  margin: 20px 0 20px 40px;
+blockquote > p:last-child {
+  text-align: right;
 }
-
-ul li, ol li {
-  margin: 10px 0;
-  font-size: 1.1em;
+blockquote > p:first-child {
+  text-align: inherit;
 }
-
-/* Imágenes */
-img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin: 10px 0;
+.header-section-number {
+  padding-right: .2em;
+  font-weight: 500;
 }
-
-/* Pie de Página */
-footer {
+.level1 .header-section-number {
+  display: inline-block;
+  border-bottom: 2px solid;
+}
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  color: #993d0f;
+}
+h1.title {
+  font-weight: 700;
+}
+.book .book-body .page-wrapper .page-inner section.normal strong {
+  font-weight: 500;
+}
+body {
+  text-align: justify;
+}
+.blackbox {
+  padding: 1em;
+  background: black;
+  color: white;
+  border: 2px solid orange;
+  border-radius: 10px;
+}
+.center {
   text-align: center;
-  margin: 30px 0;
-  font-size: 0.9em;
-  color: #777777;
 }

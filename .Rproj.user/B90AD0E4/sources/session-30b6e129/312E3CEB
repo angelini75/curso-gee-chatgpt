@@ -3,7 +3,7 @@
     "path": "C:/GIT/curso-gee-chatgpt/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "181838831",
+    "hash": "2507717671",
     "contents": "",
     "dirty": false,
     "created": 1734643358452.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "48,0",
-        "scrollLine": "8"
+        "cursorPosition": "14,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1734649234,
+    "lastKnownWriteTime": 1734657408,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1734649234981,
+    "last_content_update": 1734657408483,
     "read_only": false,
     "read_only_alternatives": []
 }
