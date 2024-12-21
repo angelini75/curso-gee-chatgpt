@@ -5,4 +5,10 @@ language:
     fig: "Figura " # Cambia "Figure" por "Figura"
     tab: "Tabla "  # Cambia "Table" por "Tabla"
 new_session: yes
+output_dir: "doc"     
 
+rmd_files:
+  - index.Rmd
+  - 01-introduccion.Rmd
+  - 02-deteccion-cambios.Rmd
+  - 05-evaluacion.Rmd

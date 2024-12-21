@@ -77,6 +77,8 @@ La validación es fundamental, ya que permite corregir errores que pueden surgir
 
 ## Análisis multitemporal de incendios en Córdoba (2020) usando ChatGPT y Google Earth Engine
 
+---
+
 ```{=html}
 <iframe src="https://es.wikipedia.org/wiki/Incendios_forestales_de_C%C3%B3rdoba_de_2020" 
         width="100%" 
@@ -85,6 +87,8 @@ La validación es fundamental, ya que permite corregir errores que pueden surgir
         allowfullscreen>
 </iframe>
 ```
+
+---
 
 En esta sección, aprenderemos a utilizar ChatGPT como asistente para desarrollar un análisis multitemporal en Google Earth Engine (GEE). El objetivo es identificar y delimitar las áreas quemadas durante los incendios forestales de Córdoba en 2020. Usaremos imágenes de la colección MODIS, que tiene una alta frecuencia temporal y permite detectar rápidamente cambios de cobertura en grandes áreas.
 
@@ -898,11 +902,19 @@ Superficie total quemada (hectáreas): 207.696
 ::::
 
 
+La imagen \@ref(fig:area-quemada) muestra la mascara final con las áreas quemadas. Compara este resultado con el artículo de wikipedia y saca conclusiones.
 
-## Preguntas al lector
+```{r area-quemada, echo=FALSE, fig.cap="Interfaz principal de Google Earth Engine.", out.width="100%"}
+knitr::include_graphics("figuras/resultado_area_quemada.png")
+```
+
+### Preguntas al lector
 
 ```{=html}
 <p> Responde las preguntas a continuación y al finalizar haz clic en Submit. Luego revisa el score para ver si las respuesta fueron correctas</p>
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXBdiHSKDk-scTQYurstMJCN6NoRtuJITlDVWmFkhyYFaVIQ/viewform?embedded=true" width="800" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+```
+
+---
 

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Evaluación | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales</title>
+  <meta name="description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Evaluación | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  <meta name="github-repo" content="https://github.com/angelini75/curso-gee-chatgpt" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Evaluación | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales" />
+  
+  <meta name="twitter:description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  
+
+<meta name="author" content="Dr. Marcos E. Angelini" />
+
+
+<meta name="date" content="2024-12-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-multitemporal-para-la-detección-de-cambios.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Uso de Google Earth Engine</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Acerca del libro</a></li>
+<li class="chapter" data-level="2" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>2</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción.html"><a href="introducción.html#google-earth-engine"><i class="fa fa-check"></i><b>2.1</b> Google Earth Engine</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introducción.html"><a href="introducción.html#qué-es-google-earth-engine"><i class="fa fa-check"></i><b>2.1.1</b> ¿Qué es Google Earth Engine?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introducción.html"><a href="introducción.html#creación-de-una-cuenta-en-google-earth-engine"><i class="fa fa-check"></i><b>2.1.2</b> Creación de una Cuenta en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introducción.html"><a href="introducción.html#creación-de-un-proyecto-en-google-earth-engine"><i class="fa fa-check"></i><b>2.1.3</b> Creación de un Proyecto en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introducción.html"><a href="introducción.html#consideraciones-adicionales"><i class="fa fa-check"></i><b>2.1.4</b> Consideraciones Adicionales</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introducción.html"><a href="introducción.html#bondades-de-google-earth-engine"><i class="fa fa-check"></i><b>2.1.5</b> Bondades de Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introducción.html"><a href="introducción.html#partes-esenciales-de-la-plataforma"><i class="fa fa-check"></i><b>2.1.6</b> Partes esenciales de la plataforma</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introducción.html"><a href="introducción.html#por-qué-es-importante-esta-plataforma"><i class="fa fa-check"></i><b>2.1.7</b> ¿Por qué es importante esta plataforma?</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introducción.html"><a href="introducción.html#condiciones-de-uso"><i class="fa fa-check"></i><b>2.1.8</b> Condiciones de uso</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introducción.html"><a href="introducción.html#ejemplo-de-las-capacidades-de-gee"><i class="fa fa-check"></i><b>2.1.9</b> Ejemplo de las capacidades de GEE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introducción.html"><a href="introducción.html#introducción-a-javascript"><i class="fa fa-check"></i><b>2.2</b> Introducción a JavaScript</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introducción.html"><a href="introducción.html#elementos-básicos-de-un-script-de-javascript"><i class="fa fa-check"></i><b>2.2.1</b> Elementos básicos de un script de JavaScript</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introducción.html"><a href="introducción.html#entendiendo-la-sintaxis-en-javascript-y-google-earth-engine"><i class="fa fa-check"></i><b>2.2.2</b> Entendiendo la sintaxis en JavaScript y Google Earth Engine</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introducción.html"><a href="introducción.html#elementos-clave-de-la-sintaxis"><i class="fa fa-check"></i><b>2.2.3</b> Elementos clave de la sintaxis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introducción.html"><a href="introducción.html#cómo-leer-un-script"><i class="fa fa-check"></i><b>2.2.4</b> Cómo leer un script</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introducción.html"><a href="introducción.html#ejemplo-básico-desglosado"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo básico desglosado</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introducción.html"><a href="introducción.html#el-uso-de-la-función-print"><i class="fa fa-check"></i><b>2.2.6</b> El uso de la función <code>print</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path="introducción.html"><a href="introducción.html#un-primer-script-en-google-earth-engine"><i class="fa fa-check"></i><b>2.2.7</b> Un primer script en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introducción.html"><a href="introducción.html#pregunta-para-el-lector"><i class="fa fa-check"></i><b>2.2.8</b> Pregunta para el lector</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introducción.html"><a href="introducción.html#ejercicio"><i class="fa fa-check"></i><b>2.2.9</b> Ejercicio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introducción.html"><a href="introducción.html#introducción-a-chatgpt"><i class="fa fa-check"></i><b>2.3</b> Introducción a ChatGPT</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introducción.html"><a href="introducción.html#qué-son-los-grandes-modelos-de-lenguaje-llm"><i class="fa fa-check"></i><b>2.3.1</b> ¿Qué son los Grandes Modelos de Lenguaje (LLM)?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introducción.html"><a href="introducción.html#creación-de-una-cuenta-en-chatgpt"><i class="fa fa-check"></i><b>2.3.2</b> Creación de una Cuenta en ChatGPT</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introducción.html"><a href="introducción.html#explorando-la-interfaz-de-chatgpt"><i class="fa fa-check"></i><b>2.3.3</b> Explorando la Interfaz de ChatGPT</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introducción.html"><a href="introducción.html#ingeniería-de-prompts"><i class="fa fa-check"></i><b>2.3.4</b> Ingeniería de Prompts</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introducción.html"><a href="introducción.html#preguntas-al-lector"><i class="fa fa-check"></i><b>2.3.5</b> Preguntas al lector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html"><i class="fa fa-check"></i><b>3</b> Análisis multitemporal para la detección de cambios</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#pasos-para-el-análisis-multitemporal"><i class="fa fa-check"></i><b>3.1</b> Pasos para el análisis multitemporal</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#definir-la-región-de-interés-roi"><i class="fa fa-check"></i><b>3.1.1</b> 1. Definir la región de interés (ROI)</a></li>
+<li class="chapter" data-level="3.1.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#seleccionar-las-colecciones-de-imágenes-adecuadas"><i class="fa fa-check"></i><b>3.1.2</b> 2. Seleccionar las colecciones de imágenes adecuadas</a></li>
+<li class="chapter" data-level="3.1.3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#aplicar-filtros-temporales-y-espaciales"><i class="fa fa-check"></i><b>3.1.3</b> 3. Aplicar filtros temporales y espaciales</a></li>
+<li class="chapter" data-level="3.1.4" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#preprocesamiento-de-las-imágenes"><i class="fa fa-check"></i><b>3.1.4</b> 4. Preprocesamiento de las imágenes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#calcular-índices-o-métricas-relevantes"><i class="fa fa-check"></i><b>3.1.5</b> 5. Calcular índices o métricas relevantes</a></li>
+<li class="chapter" data-level="3.1.6" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#generar-composiciones-temporales"><i class="fa fa-check"></i><b>3.1.6</b> 6. Generar composiciones temporales</a></li>
+<li class="chapter" data-level="3.1.7" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#analizar-y-visualizar-los-resultados"><i class="fa fa-check"></i><b>3.1.7</b> 7. Analizar y visualizar los resultados</a></li>
+<li class="chapter" data-level="3.1.8" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#validación-y-verificación"><i class="fa fa-check"></i><b>3.1.8</b> 8. Validación y verificación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#análisis-multitemporal-de-incendios-en-córdoba-2020-usando-chatgpt-y-google-earth-engine"><i class="fa fa-check"></i><b>3.2</b> Análisis multitemporal de incendios en Córdoba (2020) usando ChatGPT y Google Earth Engine</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#objetivo-general"><i class="fa fa-check"></i><b>3.2.1</b> Objetivo general</a></li>
+<li class="chapter" data-level="3.2.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#instrucciones-generales-para-los-estudiantes"><i class="fa fa-check"></i><b>3.2.2</b> Instrucciones generales para los estudiantes</a></li>
+<li class="chapter" data-level="3.2.3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-inicial-para-chatgpt"><i class="fa fa-check"></i><b>3.2.3</b> Prompt inicial para ChatGPT</a></li>
+<li class="chapter" data-level="3.2.4" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-1-definir-la-región-de-interés-roi-siguiendo-la-metodología-paso-a-paso."><i class="fa fa-check"></i><b>3.2.4</b> Paso 1: Definir la región de interés (ROI), siguiendo la metodología paso a paso.</a></li>
+<li class="chapter" data-level="3.2.5" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-2-seleccionar-imágenes-modis-antes-y-después-de-los-incendios"><i class="fa fa-check"></i><b>3.2.5</b> Paso 2: Seleccionar imágenes MODIS antes y después de los incendios</a></li>
+<li class="chapter" data-level="3.2.6" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-3-calcular-el-índice-nbr-normalized-burn-ratio"><i class="fa fa-check"></i><b>3.2.6</b> Paso 3: Calcular el Índice NBR (Normalized Burn Ratio)</a></li>
+<li class="chapter" data-level="3.2.7" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-4-calcular-la-diferencia-de-nbr-dnbr"><i class="fa fa-check"></i><b>3.2.7</b> Paso 4: Calcular la Diferencia de NBR (dNBR)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-5-crear-una-máscara-de-áreas-quemadas"><i class="fa fa-check"></i><b>3.2.8</b> Paso 5: Crear una Máscara de Áreas Quemadas</a></li>
+<li class="chapter" data-level="3.2.9" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua"><i class="fa fa-check"></i><b>3.2.9</b> Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)</a></li>
+<li class="chapter" data-level="3.2.10" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-7-calcular-la-superficie-total-quemada"><i class="fa fa-check"></i><b>3.2.10</b> Paso 7: Calcular la Superficie Total Quemada</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#preguntas-al-lector-1"><i class="fa fa-check"></i><b>3.3</b> Preguntas al lector</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="evaluación.html"><a href="evaluación.html"><i class="fa fa-check"></i><b>4</b> Evaluación</a>
+<ul>
+<li class="chapter" data-level="4.0.1" data-path="evaluación.html"><a href="evaluación.html#evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013"><i class="fa fa-check"></i><b>4.0.1</b> Evaluación práctica: Análisis multitemporal para detectar inundaciones en La Plata (2013)</a></li>
+<li class="chapter" data-level="4.0.2" data-path="evaluación.html"><a href="evaluación.html#requisitos-para-la-entrega"><i class="fa fa-check"></i><b>4.0.2</b> Requisitos para la entrega:</a></li>
+<li class="chapter" data-level="4.0.3" data-path="evaluación.html"><a href="evaluación.html#instrucciones"><i class="fa fa-check"></i><b>4.0.3</b> Instrucciones:</a></li>
+<li class="chapter" data-level="4.0.4" data-path="evaluación.html"><a href="evaluación.html#entregables"><i class="fa fa-check"></i><b>4.0.4</b> Entregables:</a></li>
+<li class="chapter" data-level="4.0.5" data-path="evaluación.html"><a href="evaluación.html#criterios-de-evaluación"><i class="fa fa-check"></i><b>4.0.5</b> Criterios de evaluación:</a></li>
+<li class="chapter" data-level="4.0.6" data-path="evaluación.html"><a href="evaluación.html#nota-adicional"><i class="fa fa-check"></i><b>4.0.6</b> Nota adicional:</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/angelini75/curso-gee-chatgpt" target="blank">Publicado con Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="evaluación" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Evaluación<a href="evaluación.html#evaluación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013" class="section level3 hasAnchor" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> Evaluación práctica: Análisis multitemporal para detectar inundaciones en La Plata (2013)<a href="evaluación.html#evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="objetivo-1" class="section level4 hasAnchor" number="4.0.1.1">
+<h4><span class="header-section-number">4.0.1.1</span> Objetivo:<a href="evaluación.html#objetivo-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Los estudiantes deben realizar un análisis multitemporal en <strong>Google Earth Engine (GEE)</strong> para identificar las áreas afectadas por las inundaciones en La Plata durante abril de 2013, utilizando imágenes satelitales y técnicas de teledetección.</p>
+<hr />
+<hr />
+</div>
+</div>
+<div id="requisitos-para-la-entrega" class="section level3 hasAnchor" number="4.0.2">
+<h3><span class="header-section-number">4.0.2</span> Requisitos para la entrega:<a href="evaluación.html#requisitos-para-la-entrega" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Script en GEE</strong>: Los estudiantes deben entregar el script que implementaron en GEE, asegurándose de comentar cada línea para explicar su función.</li>
+<li><strong>Resultados visuales</strong>: Incluya capturas de pantalla del mapa generado que muestre las áreas afectadas por las inundaciones.</li>
+<li><strong>Informe breve</strong>: Explica los resultados obtenidos, incluyendo las limitaciones y posibles mejoras del análisis.</li>
+</ol>
+<hr />
+</div>
+<div id="instrucciones" class="section level3 hasAnchor" number="4.0.3">
+<h3><span class="header-section-number">4.0.3</span> Instrucciones:<a href="evaluación.html#instrucciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Definir la región de interés (ROI)</strong>
+<ul>
+<li>Define la región correspondiente a La Plata y sus alrededores usando la colección de límites administrativos (por ejemplo, FAO/GAUL o GADM).</li>
+<li>Visualiza la región en el mapa para verificar que está correctamente delimitada.</li>
+</ul></li>
+<li><strong>Seleccionar las imágenes satelitales</strong>
+<ul>
+<li>Usa la colección de imágenes Landsat 7.</li>
+<li>Filtra las imágenes para dos períodos:
+<ul>
+<li>Antes del evento (marzo 2013).</li>
+<li>Durante o después del evento (abril 2013).</li>
+</ul></li>
+</ul></li>
+<li><strong>Preprocesamiento</strong>
+<ul>
+<li>Aplica filtros de nubosidad y recorta las imágenes a la región de interés.</li>
+<li>Realiza las correcciones atmosféricas o utiliza índices relevantes para reducir ruido.</li>
+</ul></li>
+<li><strong>Calcular índices</strong>
+<ul>
+<li>Calcula índices relevantes como el <strong>NDWI</strong> (Índice de Agua Diferenciado Normalizado) o el <strong>NDVI</strong>, según el tipo de imagen satelital.</li>
+<li>Analiza los cambios en los índices entre los períodos pre y post-inundación.</li>
+</ul></li>
+<li><strong>Generar una máscara de áreas inundadas</strong>
+<ul>
+<li>Usa un umbral en el índice calculado (por ejemplo, NDWI &gt; 0.2) para identificar áreas afectadas por agua acumulada.</li>
+<li>Excluye áreas que podrían generar falsos positivos, como cuerpos de agua permanentes.</li>
+</ul></li>
+<li><strong>Calcular la superficie afectada</strong>
+<ul>
+<li>Calcula la superficie total de las áreas inundadas (en hectáreas) utilizando la función <code>reduceRegion</code>.</li>
+</ul></li>
+<li><strong>Visualizar y exportar los resultados</strong>
+<ul>
+<li>Visualiza las áreas inundadas en el mapa con una paleta de colores distintiva.</li>
+<li>Exporta los resultados (imágenes procesadas o shapefiles) a Google Drive o al sistema local.</li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="entregables" class="section level3 hasAnchor" number="4.0.4">
+<h3><span class="header-section-number">4.0.4</span> Entregables:<a href="evaluación.html#entregables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Código comentado</strong><br />
+Subir un archivo con el script de GEE, claramente comentado.</li>
+<li><strong>Visualizaciones</strong><br />
+Adjuntar capturas de pantalla que muestren:
+<ul>
+<li>Región de interés (La Plata).</li>
+<li>Cambios en el índice entre períodos.</li>
+<li>Mapa final de áreas inundadas.</li>
+</ul></li>
+<li><strong>Informe breve</strong>
+<ul>
+<li>Resumen de los pasos realizados.</li>
+<li>Superficie total afectada por las inundaciones (en hectáreas).</li>
+<li>Limitaciones del análisis y sugerencias para futuros estudios.</li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="criterios-de-evaluación" class="section level3 hasAnchor" number="4.0.5">
+<h3><span class="header-section-number">4.0.5</span> Criterios de evaluación:<a href="evaluación.html#criterios-de-evaluación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Corrección del código</strong> (40%): Uso adecuado de las funciones de GEE y estructura lógica del script.</li>
+<li><strong>Interpretación de resultados</strong> (30%): Calidad de las visualizaciones y explicación de los resultados.</li>
+<li><strong>Creatividad y análisis crítico</strong> (20%): Identificación de limitaciones y propuestas de mejora.</li>
+<li><strong>Presentación</strong> (10%): Claridad en los comentarios del script, capturas y organización del informe.</li>
+</ul>
+<hr />
+</div>
+<div id="nota-adicional" class="section level3 hasAnchor" number="4.0.6">
+<h3><span class="header-section-number">4.0.6</span> Nota adicional:<a href="evaluación.html#nota-adicional" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este ejercicio permitirá evaluar:
+1. <strong>Manejo técnico de GEE</strong>: Uso de herramientas y funciones específicas.
+2. <strong>Capacidad de integración</strong>: Cómo utilizar ChatGPT para solucionar dudas o generar fragmentos de código.
+3. <strong>Comprensión teórica</strong>: Aplicación de conceptos clave en teledetección, como índices espectrales y análisis multitemporal.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-multitemporal-para-la-detección-de-cambios.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

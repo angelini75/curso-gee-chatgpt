@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Análisis multitemporal para la detección de cambios | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales</title>
+  <meta name="description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Análisis multitemporal para la detección de cambios | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  <meta name="github-repo" content="https://github.com/angelini75/curso-gee-chatgpt" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Análisis multitemporal para la detección de cambios | Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales" />
+  
+  <meta name="twitter:description" content="<p>Curso práctico sobre el uso de Google Earth Engine (GEE) para la gestión de recursos naturales,
+con la asistencia de ChatGPT para la generación y optimización de scripts en JavaScript.</p>" />
+  
+
+<meta name="author" content="Dr. Marcos E. Angelini" />
+
+
+<meta name="date" content="2024-12-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introducción.html"/>
+<link rel="next" href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Uso de Google Earth Engine</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Acerca del libro</a></li>
+<li class="chapter" data-level="2" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>2</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción.html"><a href="introducción.html#google-earth-engine"><i class="fa fa-check"></i><b>2.1</b> Google Earth Engine</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introducción.html"><a href="introducción.html#qué-es-google-earth-engine"><i class="fa fa-check"></i><b>2.1.1</b> ¿Qué es Google Earth Engine?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introducción.html"><a href="introducción.html#creación-de-una-cuenta-en-google-earth-engine"><i class="fa fa-check"></i><b>2.1.2</b> Creación de una Cuenta en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introducción.html"><a href="introducción.html#creación-de-un-proyecto-en-google-earth-engine"><i class="fa fa-check"></i><b>2.1.3</b> Creación de un Proyecto en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introducción.html"><a href="introducción.html#consideraciones-adicionales"><i class="fa fa-check"></i><b>2.1.4</b> Consideraciones Adicionales</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introducción.html"><a href="introducción.html#bondades-de-google-earth-engine"><i class="fa fa-check"></i><b>2.1.5</b> Bondades de Google Earth Engine</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introducción.html"><a href="introducción.html#partes-esenciales-de-la-plataforma"><i class="fa fa-check"></i><b>2.1.6</b> Partes esenciales de la plataforma</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introducción.html"><a href="introducción.html#por-qué-es-importante-esta-plataforma"><i class="fa fa-check"></i><b>2.1.7</b> ¿Por qué es importante esta plataforma?</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introducción.html"><a href="introducción.html#condiciones-de-uso"><i class="fa fa-check"></i><b>2.1.8</b> Condiciones de uso</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introducción.html"><a href="introducción.html#ejemplo-de-las-capacidades-de-gee"><i class="fa fa-check"></i><b>2.1.9</b> Ejemplo de las capacidades de GEE</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introducción.html"><a href="introducción.html#introducción-a-javascript"><i class="fa fa-check"></i><b>2.2</b> Introducción a JavaScript</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introducción.html"><a href="introducción.html#elementos-básicos-de-un-script-de-javascript"><i class="fa fa-check"></i><b>2.2.1</b> Elementos básicos de un script de JavaScript</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introducción.html"><a href="introducción.html#entendiendo-la-sintaxis-en-javascript-y-google-earth-engine"><i class="fa fa-check"></i><b>2.2.2</b> Entendiendo la sintaxis en JavaScript y Google Earth Engine</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introducción.html"><a href="introducción.html#elementos-clave-de-la-sintaxis"><i class="fa fa-check"></i><b>2.2.3</b> Elementos clave de la sintaxis</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introducción.html"><a href="introducción.html#cómo-leer-un-script"><i class="fa fa-check"></i><b>2.2.4</b> Cómo leer un script</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introducción.html"><a href="introducción.html#ejemplo-básico-desglosado"><i class="fa fa-check"></i><b>2.2.5</b> Ejemplo básico desglosado</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introducción.html"><a href="introducción.html#el-uso-de-la-función-print"><i class="fa fa-check"></i><b>2.2.6</b> El uso de la función <code>print</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path="introducción.html"><a href="introducción.html#un-primer-script-en-google-earth-engine"><i class="fa fa-check"></i><b>2.2.7</b> Un primer script en Google Earth Engine</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introducción.html"><a href="introducción.html#pregunta-para-el-lector"><i class="fa fa-check"></i><b>2.2.8</b> Pregunta para el lector</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introducción.html"><a href="introducción.html#ejercicio"><i class="fa fa-check"></i><b>2.2.9</b> Ejercicio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introducción.html"><a href="introducción.html#introducción-a-chatgpt"><i class="fa fa-check"></i><b>2.3</b> Introducción a ChatGPT</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introducción.html"><a href="introducción.html#qué-son-los-grandes-modelos-de-lenguaje-llm"><i class="fa fa-check"></i><b>2.3.1</b> ¿Qué son los Grandes Modelos de Lenguaje (LLM)?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introducción.html"><a href="introducción.html#creación-de-una-cuenta-en-chatgpt"><i class="fa fa-check"></i><b>2.3.2</b> Creación de una Cuenta en ChatGPT</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introducción.html"><a href="introducción.html#explorando-la-interfaz-de-chatgpt"><i class="fa fa-check"></i><b>2.3.3</b> Explorando la Interfaz de ChatGPT</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introducción.html"><a href="introducción.html#ingeniería-de-prompts"><i class="fa fa-check"></i><b>2.3.4</b> Ingeniería de Prompts</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introducción.html"><a href="introducción.html#preguntas-al-lector"><i class="fa fa-check"></i><b>2.3.5</b> Preguntas al lector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html"><i class="fa fa-check"></i><b>3</b> Análisis multitemporal para la detección de cambios</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#pasos-para-el-análisis-multitemporal"><i class="fa fa-check"></i><b>3.1</b> Pasos para el análisis multitemporal</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#definir-la-región-de-interés-roi"><i class="fa fa-check"></i><b>3.1.1</b> 1. Definir la región de interés (ROI)</a></li>
+<li class="chapter" data-level="3.1.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#seleccionar-las-colecciones-de-imágenes-adecuadas"><i class="fa fa-check"></i><b>3.1.2</b> 2. Seleccionar las colecciones de imágenes adecuadas</a></li>
+<li class="chapter" data-level="3.1.3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#aplicar-filtros-temporales-y-espaciales"><i class="fa fa-check"></i><b>3.1.3</b> 3. Aplicar filtros temporales y espaciales</a></li>
+<li class="chapter" data-level="3.1.4" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#preprocesamiento-de-las-imágenes"><i class="fa fa-check"></i><b>3.1.4</b> 4. Preprocesamiento de las imágenes</a></li>
+<li class="chapter" data-level="3.1.5" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#calcular-índices-o-métricas-relevantes"><i class="fa fa-check"></i><b>3.1.5</b> 5. Calcular índices o métricas relevantes</a></li>
+<li class="chapter" data-level="3.1.6" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#generar-composiciones-temporales"><i class="fa fa-check"></i><b>3.1.6</b> 6. Generar composiciones temporales</a></li>
+<li class="chapter" data-level="3.1.7" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#analizar-y-visualizar-los-resultados"><i class="fa fa-check"></i><b>3.1.7</b> 7. Analizar y visualizar los resultados</a></li>
+<li class="chapter" data-level="3.1.8" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#validación-y-verificación"><i class="fa fa-check"></i><b>3.1.8</b> 8. Validación y verificación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#análisis-multitemporal-de-incendios-en-córdoba-2020-usando-chatgpt-y-google-earth-engine"><i class="fa fa-check"></i><b>3.2</b> Análisis multitemporal de incendios en Córdoba (2020) usando ChatGPT y Google Earth Engine</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#objetivo-general"><i class="fa fa-check"></i><b>3.2.1</b> Objetivo general</a></li>
+<li class="chapter" data-level="3.2.2" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#instrucciones-generales-para-los-estudiantes"><i class="fa fa-check"></i><b>3.2.2</b> Instrucciones generales para los estudiantes</a></li>
+<li class="chapter" data-level="3.2.3" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-inicial-para-chatgpt"><i class="fa fa-check"></i><b>3.2.3</b> Prompt inicial para ChatGPT</a></li>
+<li class="chapter" data-level="3.2.4" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-1-definir-la-región-de-interés-roi-siguiendo-la-metodología-paso-a-paso."><i class="fa fa-check"></i><b>3.2.4</b> Paso 1: Definir la región de interés (ROI), siguiendo la metodología paso a paso.</a></li>
+<li class="chapter" data-level="3.2.5" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-2-seleccionar-imágenes-modis-antes-y-después-de-los-incendios"><i class="fa fa-check"></i><b>3.2.5</b> Paso 2: Seleccionar imágenes MODIS antes y después de los incendios</a></li>
+<li class="chapter" data-level="3.2.6" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-3-calcular-el-índice-nbr-normalized-burn-ratio"><i class="fa fa-check"></i><b>3.2.6</b> Paso 3: Calcular el Índice NBR (Normalized Burn Ratio)</a></li>
+<li class="chapter" data-level="3.2.7" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-4-calcular-la-diferencia-de-nbr-dnbr"><i class="fa fa-check"></i><b>3.2.7</b> Paso 4: Calcular la Diferencia de NBR (dNBR)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-5-crear-una-máscara-de-áreas-quemadas"><i class="fa fa-check"></i><b>3.2.8</b> Paso 5: Crear una Máscara de Áreas Quemadas</a></li>
+<li class="chapter" data-level="3.2.9" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua"><i class="fa fa-check"></i><b>3.2.9</b> Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)</a></li>
+<li class="chapter" data-level="3.2.10" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-7-calcular-la-superficie-total-quemada"><i class="fa fa-check"></i><b>3.2.10</b> Paso 7: Calcular la Superficie Total Quemada</a></li>
+<li class="chapter" data-level="3.2.11" data-path="análisis-multitemporal-para-la-detección-de-cambios.html"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#preguntas-al-lector-1"><i class="fa fa-check"></i><b>3.2.11</b> Preguntas al lector</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><i class="fa fa-check"></i><b>4</b> Evaluación práctica: Análisis multitemporal para detectar inundaciones en La Plata (2013)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#objetivo-1"><i class="fa fa-check"></i><b>4.1</b> Objetivo:</a></li>
+<li class="chapter" data-level="4.2" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#requisitos-para-la-entrega"><i class="fa fa-check"></i><b>4.2</b> Requisitos para la entrega:</a></li>
+<li class="chapter" data-level="4.3" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#instrucciones"><i class="fa fa-check"></i><b>4.3</b> Instrucciones:</a></li>
+<li class="chapter" data-level="4.4" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#entregables"><i class="fa fa-check"></i><b>4.4</b> Entregables:</a></li>
+<li class="chapter" data-level="4.5" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#criterios-de-evaluación"><i class="fa fa-check"></i><b>4.5</b> Criterios de evaluación:</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/angelini75/curso-gee-chatgpt" target="blank">Publicado con Bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-multitemporal-para-la-detección-de-cambios" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Análisis multitemporal para la detección de cambios<a href="análisis-multitemporal-para-la-detección-de-cambios.html#análisis-multitemporal-para-la-detección-de-cambios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El análisis multitemporal en Google Earth Engine (GEE) permite estudiar cómo evolucionan las características de una región a lo largo del tiempo utilizando imágenes satelitales capturadas en diferentes fechas. Esta técnica es fundamental para monitorear fenómenos como la deforestación, el avance urbano, los incendios forestales o las inundaciones. Al integrar este tipo de análisis en GEE, los usuarios pueden automatizar procesos y manejar grandes volúmenes de datos satelitales de forma eficiente.</p>
+<p>A continuación, se describen los pasos esenciales para realizar un análisis multitemporal, integrando tanto la teoría subyacente como la práctica para que puedas aplicarlos de forma efectiva.</p>
+<hr />
+<div id="pasos-para-el-análisis-multitemporal" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Pasos para el análisis multitemporal<a href="análisis-multitemporal-para-la-detección-de-cambios.html#pasos-para-el-análisis-multitemporal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="definir-la-región-de-interés-roi" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> 1. Definir la región de interés (ROI)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#definir-la-región-de-interés-roi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El primer paso para cualquier análisis geoespacial es definir la región de interés (ROI, por sus siglas en inglés). Esta región establece el área geográfica donde se concentrará el análisis y delimita el espacio que se analizará en cada imagen satelital. Definir la ROI correctamente es esencial para optimizar el rendimiento computacional, ya que permite reducir el volumen de datos procesados.</p>
+<p>Para definir la ROI, puedes optar por distintas estrategias. Por un lado, puedes dibujar la región directamente en el editor de GEE utilizando las herramientas de dibujo (polígonos, puntos o rectángulos). Por otro lado, si ya cuentas con archivos de formato Shapefile o GeoJSON, puedes importarlos y usarlos como referencia para la región de estudio. Las coordenadas también se pueden definir manualmente si tienes puntos específicos en mente.</p>
+<p>Desde el punto de vista teórico, la ROI establece los límites espaciales del análisis, lo que significa que solo los píxeles dentro de esta región serán procesados. Esto mejora la eficiencia computacional y permite focalizar los recursos de procesamiento en el área relevante.</p>
+</div>
+<div id="seleccionar-las-colecciones-de-imágenes-adecuadas" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> 2. Seleccionar las colecciones de imágenes adecuadas<a href="análisis-multitemporal-para-la-detección-de-cambios.html#seleccionar-las-colecciones-de-imágenes-adecuadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Una vez que se ha definido la región, se deben seleccionar las colecciones de imágenes satelitales adecuadas. Las imágenes deben cubrir el período de tiempo que se desea analizar y, además, deben ser apropiadas para los objetivos del análisis. Los conjuntos de datos más utilizados en GEE incluyen las colecciones de Landsat, Sentinel-2 y MODIS.</p>
+<p>La elección de la colección de imágenes depende del fenómeno a estudiar. Por ejemplo, para la detección de cambios en la vegetación, el NDVI (Índice de Vegetación de Diferencia Normalizada) suele calcularse a partir de las bandas de infrarrojo cercano y rojo, que están presentes tanto en Landsat como en Sentinel. Si se busca mayor resolución temporal, se prefiere Sentinel-2, ya que ofrece imágenes cada 5 días, mientras que Landsat solo captura imágenes cada 16 días.</p>
+<p>Desde una perspectiva teórica, la disponibilidad de una amplia colección de imágenes garantiza la posibilidad de realizar un análisis preciso. También es fundamental considerar la cobertura de nubes de la colección seleccionada, ya que la nubosidad puede dificultar la observación de la superficie terrestre.</p>
+</div>
+<div id="aplicar-filtros-temporales-y-espaciales" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> 3. Aplicar filtros temporales y espaciales<a href="análisis-multitemporal-para-la-detección-de-cambios.html#aplicar-filtros-temporales-y-espaciales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Con la colección de imágenes seleccionada, se deben aplicar filtros para reducir el volumen de imágenes a las fechas y áreas de interés. Este proceso implica dos acciones clave: filtrar por rango de fechas y por región de interés.</p>
+<p>El filtro de fechas permite seleccionar imágenes dentro de un rango temporal específico. Este paso es esencial para realizar comparaciones antes y después de eventos como incendios o inundaciones. Por ejemplo, si se desea estudiar la deforestación entre 2018 y 2022, se puede aplicar un filtro de fechas que permita extraer solo las imágenes de esos años.</p>
+<p>El filtro espacial asegura que solo se utilicen imágenes que intersecten la región de interés (ROI). De esta forma, se evitan imágenes innecesarias de regiones distantes que no aportan valor al análisis. Esta etapa es clave para reducir el tamaño de los datos y acelerar el procesamiento.</p>
+<p>Teóricamente, los filtros temporales y espaciales garantizan que solo se procesen los datos que realmente importan. Además, estos filtros reducen la carga de procesamiento computacional, permitiendo una ejecución más eficiente y rápida.</p>
+</div>
+<div id="preprocesamiento-de-las-imágenes" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> 4. Preprocesamiento de las imágenes<a href="análisis-multitemporal-para-la-detección-de-cambios.html#preprocesamiento-de-las-imágenes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El preprocesamiento de imágenes es esencial para asegurar la calidad y precisión de los datos antes de aplicar cualquier tipo de análisis. Este paso permite corregir posibles errores o distorsiones en las imágenes satelitales, asegurando que los resultados no estén contaminados por elementos indeseados.</p>
+<p>El preprocesamiento puede incluir la corrección atmosférica, que se utiliza para eliminar los efectos de la atmósfera (como neblina o aerosoles) en la reflectancia de la superficie. Este paso es crucial para realizar comparaciones multitemporales, ya que las variaciones en la atmósfera pueden hacer que una imagen parezca diferente a otra, incluso si no ha habido ningún cambio real en la superficie.</p>
+<p>Otra tarea importante del preprocesamiento es la eliminación de nubes y sombras. Las nubes pueden bloquear la vista de la superficie terrestre, mientras que las sombras proyectadas por estas nubes pueden introducir errores en los análisis. Las imágenes de las colecciones Sentinel y Landsat suelen incluir máscaras de nubes que permiten ocultarlas automáticamente.</p>
+</div>
+<div id="calcular-índices-o-métricas-relevantes" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> 5. Calcular índices o métricas relevantes<a href="análisis-multitemporal-para-la-detección-de-cambios.html#calcular-índices-o-métricas-relevantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para visualizar y cuantificar los cambios en la superficie terrestre, es común calcular índices o métricas que resuman la información contenida en las bandas espectrales. Los índices de vegetación, agua o suelo son los más utilizados en teledetección.</p>
+<p>El NDVI (Índice de Vegetación de Diferencia Normalizada) es uno de los índices más comunes. Se calcula combinando la banda de infrarrojo cercano (NIR) y la banda roja (Red), y permite detectar la presencia de vegetación viva. Este índice varía entre -1 y 1, donde valores altos indican vegetación densa y valores bajos representan suelos desnudos o cuerpos de agua.</p>
+<p>Otros índices relevantes incluyen el NDWI (índice de agua) y el NDSI (índice de nieve). Cada uno de estos índices resalta características específicas de la superficie, lo que facilita la identificación de cambios a lo largo del tiempo.</p>
+</div>
+<div id="generar-composiciones-temporales" class="section level3 hasAnchor" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> 6. Generar composiciones temporales<a href="análisis-multitemporal-para-la-detección-de-cambios.html#generar-composiciones-temporales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La creación de composiciones temporales permite observar los cambios visualmente. Estas composiciones se pueden realizar asignando diferentes fechas a cada canal de color (rojo, verde y azul) para representar de forma gráfica los cambios entre imágenes. Por ejemplo, se puede asignar una imagen de enero a la banda roja, una de mayo a la banda verde y una de septiembre a la banda azul.</p>
+<p>Esta técnica permite detectar cambios fácilmente, ya que las diferencias de color reflejan la variación en la cobertura del suelo. Si la vegetación ha desaparecido entre enero y septiembre, la banda verde perderá intensidad, mientras que los otros canales se mantendrán constantes.</p>
+<p>Desde una perspectiva teórica, esta técnica permite representar el cambio de forma intuitiva y visual, facilitando la identificación de áreas donde se han producido alteraciones significativas.</p>
+</div>
+<div id="analizar-y-visualizar-los-resultados" class="section level3 hasAnchor" number="3.1.7">
+<h3><span class="header-section-number">3.1.7</span> 7. Analizar y visualizar los resultados<a href="análisis-multitemporal-para-la-detección-de-cambios.html#analizar-y-visualizar-los-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En esta etapa, se analizan los resultados obtenidos y se visualizan de forma clara e interpretativa. Los cambios pueden representarse con mapas temáticos que indiquen, por ejemplo, la pérdida de cobertura forestal o la expansión de áreas urbanas.</p>
+<p>Las gráficas de series temporales son otra forma de visualizar los cambios. Estas gráficas permiten observar la evolución de un índice (por ejemplo, NDVI) a lo largo del tiempo, destacando puntos de inflexión, como incendios o inundaciones.</p>
+<p>Visualizar los resultados no solo permite identificar cambios, sino que también facilita la comunicación de los hallazgos. Los mapas temáticos y las gráficas son herramientas de comunicación visual esenciales en informes técnicos y presentaciones.</p>
+</div>
+<div id="validación-y-verificación" class="section level3 hasAnchor" number="3.1.8">
+<h3><span class="header-section-number">3.1.8</span> 8. Validación y verificación<a href="análisis-multitemporal-para-la-detección-de-cambios.html#validación-y-verificación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para garantizar que los resultados sean precisos y reproducibles, se deben validar y verificar los hallazgos. Este paso implica la comparación de los resultados con fuentes externas o datos de campo. Si se está evaluando la deforestación, se pueden utilizar imágenes de mayor resolución espacial o información obtenida de inspecciones de campo.</p>
+<p>La validación es fundamental, ya que permite corregir errores que pueden surgir por la presencia de nubes, sombras o variaciones en la reflectancia. Este paso garantiza que los resultados finales sean precisos y confiables.</p>
+</div>
+</div>
+<div id="análisis-multitemporal-de-incendios-en-córdoba-2020-usando-chatgpt-y-google-earth-engine" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Análisis multitemporal de incendios en Córdoba (2020) usando ChatGPT y Google Earth Engine<a href="análisis-multitemporal-para-la-detección-de-cambios.html#análisis-multitemporal-de-incendios-en-córdoba-2020-usando-chatgpt-y-google-earth-engine" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<hr />
+<iframe src="https://es.wikipedia.org/wiki/Incendios_forestales_de_C%C3%B3rdoba_de_2020" 
+        width="100%" 
+        height="600px" 
+        frameborder="0" 
+        allowfullscreen>
+</iframe>
+<hr />
+<p>En esta sección, aprenderemos a utilizar ChatGPT como asistente para desarrollar un análisis multitemporal en Google Earth Engine (GEE). El objetivo es identificar y delimitar las áreas quemadas durante los incendios forestales de Córdoba en 2020. Usaremos imágenes de la colección MODIS, que tiene una alta frecuencia temporal y permite detectar rápidamente cambios de cobertura en grandes áreas.</p>
+<p>El análisis se enfocará en tres tareas principales:</p>
+<ol style="list-style-type: decimal">
+<li>Identificación de los incendios utilizando índices de vegetación como el NDVI.</li>
+<li>Creación de una máscara de incendios para delimitar las áreas afectadas.</li>
+<li>Cálculo de la superficie quemada dentro de la región de interés.</li>
+</ol>
+<hr />
+<div id="objetivo-general" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Objetivo general<a href="análisis-multitemporal-para-la-detección-de-cambios.html#objetivo-general" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El objetivo es guiar al usuario para que desarrolle su propio script en GEE con la asistencia de ChatGPT. Para ello, utilizaremos prompts cuidadosamente diseñados para que ChatGPT genere el código y explique los pasos.</p>
+<hr />
+</div>
+<div id="instrucciones-generales-para-los-estudiantes" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Instrucciones generales para los estudiantes<a href="análisis-multitemporal-para-la-detección-de-cambios.html#instrucciones-generales-para-los-estudiantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Usar ChatGPT de forma activa: Durante la práctica, se te proporcionarán “Prompts de ejemplo” que deberás copiar y pegar en ChatGPT. Observa la respuesta generada y, si es necesario, mejora el prompt para obtener una respuesta más precisa.</p></li>
+<li><p>Construir el script paso a paso: No recibirás todo el código completo desde el inicio. Trabajarás en fragmentos de código que se irán construyendo poco a poco.</p></li>
+<li><p>Responder preguntas de evaluación: Al final, se te harán preguntas para verificar tu comprensión de los conceptos.</p></li>
+</ol>
+<hr />
+<p>Aquí tienes un prompt detallado y completo para definir el caso de estudio y el objetivo del análisis para ChatGPT. Este prompt está diseñado para que ChatGPT comprenda completamente el contexto, la tarea específica, los pasos a seguir y el formato de los resultados esperados. Este prompt se puede utilizar directamente en ChatGPT para obtener respuestas precisas y personalizadas para el análisis multitemporal.</p>
+<hr />
+</div>
+<div id="prompt-inicial-para-chatgpt" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Prompt inicial para ChatGPT<a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-inicial-para-chatgpt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>Actúa como un experto en Google Earth Engine (GEE) y teledetección. Necesito realizar un análisis multitemporal para identificar las áreas afectadas por los incendios forestales que ocurrieron en la provincia de Córdoba, Argentina, entre julio y noviembre de 2020. Este análisis se llevará a cabo paso a paso y tu tarea será proporcionar código parcial y explicaciones breves en cada paso, no el código completo de una sola vez.
+
+### Contexto general
+1. Ubicación: La región de interés (ROI) es la provincia de Córdoba, Argentina, que fue gravemente afectada por incendios forestales en 2020.
+2. Fechas de análisis: Necesito imágenes de dos periodos clave:
+   - Imagen previa a los incendios: Junio de 2020 (antes del inicio de los incendios).
+   - Imagen posterior a los incendios: Noviembre de 2020 (cuando los incendios ya habían finalizado).
+3. Fuente de datos: Usaremos la colección de imágenes satelitales de MODIS (MOD09GA) debido a su alta frecuencia de captura.
+4. Objetivo: Identificar y cuantificar la superficie quemada mediante el cálculo del índice de quemadura normalizada (NBR) y la diferencia de NBR (dNBR) entre las dos fechas.
+5. Indicadores clave: 
+   - NBR: Índice de quemadura normalizada, calculado a partir de las bandas NIR y SWIR (para MODIS, las bandas 2 y 7, respectivamente).
+   - dNBR: Diferencia entre el NBR antes y después del incendio.
+   - Superficie quemada: Se consideran quemadas las áreas donde dNBR &gt; 0.66.
+
+---
+
+### Flujo de trabajo propuesto
+El análisis se realizará paso a paso y en cada paso te solicitaré que generes un fragmento de código parcial y comentado para completar la tarea. Los pasos son los siguientes:
+1. Definir la región de interés (ROI): Proporciona el código para obtener la geometría de la provincia de Córdoba (Argentina) a partir de la colección FAO/GAUL.
+2. Seleccionar imágenes MODIS antes y después de los incendios: Proporciona el código para seleccionar las imágenes MODIS de junio y noviembre de 2020, aplicando los filtros de región y fechas.
+3. Calcular el índice NBR antes y después del incendio: Proporciona el código para calcular el NBR para las imágenes antes y después del incendio.
+4. Calcular la diferencia de NBR (dNBR): Proporciona el código para calcular la diferencia de NBR (dNBR) y resaltar las áreas quemadas.
+5. Crear la máscara de áreas quemadas: Proporciona el código para generar una máscara binaria que resalte las áreas donde dNBR &gt; 0.66.
+6. Calcular la superficie total quemada: Proporciona el código para calcular la superficie total quemada (en hectáreas) utilizando la función reduceRegion.
+7. Visualizar los resultados: Proporciona el código para visualizar las capas de NBR, dNBR y la máscara de áreas quemadas en el mapa.
+8. Exportar los resultados: Proporciona el código para exportar la imagen de las áreas quemadas a Google Drive.
+
+---
+
+### Instrucciones adicionales
+- Proporcióname el código para un solo paso a la vez, y asegúrate de explicar cada línea del código.
+- No me proporciones todo el código de una sola vez. Quiero avanzar paso a paso para comprender cada parte.
+- Usa comentarios en cada línea de código para explicar el propósito de cada operación.
+- Al final de cada paso, indícame si hay alguna recomendación o buena práctica para optimizar el análisis.
+- Proporciona sugerencias para depurar o corregir errores si algo no funciona según lo esperado.
+
+---
+
+Para comenzar, vamos a realizar el Paso 1: Definir la región de interés (ROI). Proporciona el fragmento de código para definir la región de Córdoba, Argentina, usando la colección FAO/GAUL y explica cada línea del código.</code></pre>
+<hr />
+<div id="explicación-del-prompt" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> Explicación del Prompt<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-prompt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><p>Contexto inicial:<br />
+Este prompt establece claramente la región de interés, la fuente de datos y los objetivos del análisis. Esto asegura que ChatGPT comprenda el contexto y la tarea principal desde el inicio.</p></li>
+<li><p>Estructura de los pasos:<br />
+Se enumeran los pasos específicos, pero se le dice explícitamente a ChatGPT que debe entregar un solo paso a la vez. Este enfoque asegura que el usuario tenga control sobre la secuencia de instrucciones.</p></li>
+<li><p>Instrucciones claras:<br />
+Se pide que el código esté comentado y explicado línea por línea, facilitando la comprensión del usuario.<br />
+Se prohíbe explícitamente que ChatGPT entregue todo el código de una vez, con la intención de que el usuario aprenda y pueda reflexionar sobre cada parte antes de avanzar.</p></li>
+</ol>
+<hr />
+</div>
+<div id="resultado-del-prompt" class="section level4 hasAnchor" number="3.2.3.2">
+<h4><span class="header-section-number">3.2.3.2</span> Resultado del prompt<a href="análisis-multitemporal-para-la-detección-de-cambios.html#resultado-del-prompt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb39"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb39-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-1" tabindex="-1"></a><span class="co">// Paso 1: Definir la región de interés (ROI)</span></span>
+<span id="cb39-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-2" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-3" tabindex="-1"></a><span class="co">// 1. Cargar la colección de límites administrativos GAUL de FAO</span></span>
+<span id="cb39-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-4" tabindex="-1"></a><span class="kw">var</span> gaulCollection <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&#39;FAO/GAUL/2015/level1&#39;</span>)<span class="op">;</span></span>
+<span id="cb39-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-5" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-6" tabindex="-1"></a><span class="co">// 2. Filtrar la colección para seleccionar solo las características (regiones) de Argentina</span></span>
+<span id="cb39-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-7" tabindex="-1"></a><span class="kw">var</span> argentina <span class="op">=</span> gaulCollection<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">&#39;ADM0_NAME&#39;</span><span class="op">,</span> <span class="st">&#39;Argentina&#39;</span>))<span class="op">;</span></span>
+<span id="cb39-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-8" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-9" tabindex="-1"></a><span class="co">// 3. Filtrar la región de interés para obtener solo la provincia de Córdoba</span></span>
+<span id="cb39-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-10" tabindex="-1"></a><span class="kw">var</span> cordoba <span class="op">=</span> argentina<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">&#39;ADM1_NAME&#39;</span><span class="op">,</span> <span class="st">&#39;Córdoba&#39;</span>))<span class="op">;</span></span>
+<span id="cb39-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-11" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-12" tabindex="-1"></a><span class="co">// 4. Visualizar la región de Córdoba en el mapa para verificar que la geometría esté correcta</span></span>
+<span id="cb39-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-13" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(cordoba<span class="op">,</span> <span class="dv">8</span>)<span class="op">;</span> <span class="co">// Centrar el mapa en Córdoba con un nivel de zoom de 8</span></span>
+<span id="cb39-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb39-14" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(cordoba<span class="op">,</span> {<span class="dt">color</span><span class="op">:</span> <span class="st">&#39;red&#39;</span>}<span class="op">,</span> <span class="st">&#39;Provincia de Córdoba&#39;</span>)<span class="op">;</span> <span class="co">// Añadir la capa de Córdoba al mapa</span></span></code></pre></div>
+<blockquote>
+<p>Identifica el problema en el código y corrige el prompt si es necesario</p>
+</blockquote>
+</div>
+</div>
+<div id="paso-1-definir-la-región-de-interés-roi-siguiendo-la-metodología-paso-a-paso." class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Paso 1: Definir la región de interés (ROI), siguiendo la metodología paso a paso.<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-1-definir-la-región-de-interés-roi-siguiendo-la-metodología-paso-a-paso." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prompt-para-chatgpt---paso-1" class="section level4 hasAnchor" number="3.2.4.1">
+<h4><span class="header-section-number">3.2.4.1</span> Prompt para ChatGPT - Paso 1<a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-para-chatgpt---paso-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Para comenzar con el análisis, necesito definir la región de interés (ROI) correspondiente a la provincia de Córdoba, Argentina. Usa la colección de FAO/GAUL para obtener la geometría de Córdoba y proporciona el código paso a paso. Explica cada línea de código y agrega comentarios dentro del código para facilitar la comprensión.</code></pre>
+<blockquote>
+<p>Copia el resultado del prompt y pegalo en GEE. Luego dale RUN al script. Evalua los resultados.</p>
+</blockquote>
+</div>
+<div id="respuesta-esperada-de-chatgpt" class="section level4 hasAnchor" number="3.2.4.2">
+<h4><span class="header-section-number">3.2.4.2</span> Respuesta esperada de ChatGPT<a href="análisis-multitemporal-para-la-detección-de-cambios.html#respuesta-esperada-de-chatgpt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-1" tabindex="-1"></a><span class="co">// Paso 1: Definir la región de interés (ROI)</span></span>
+<span id="cb41-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-2" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-3" tabindex="-1"></a><span class="co">// 1. Cargar la colección de límites administrativos GAUL de FAO (nivel 1 - provincias/estados)</span></span>
+<span id="cb41-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-4" tabindex="-1"></a><span class="kw">var</span> gaulCollection <span class="op">=</span> ee<span class="op">.</span><span class="fu">FeatureCollection</span>(<span class="st">&#39;FAO/GAUL/2015/level1&#39;</span>)<span class="op">;</span></span>
+<span id="cb41-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-5" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-6" tabindex="-1"></a><span class="co">// 2. Filtrar la colección para seleccionar solo las entidades correspondientes a Argentina</span></span>
+<span id="cb41-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-7" tabindex="-1"></a><span class="kw">var</span> argentina <span class="op">=</span> gaulCollection<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">&#39;ADM0_NAME&#39;</span><span class="op">,</span> <span class="st">&#39;Argentina&#39;</span>))<span class="op">;</span></span>
+<span id="cb41-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-8" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-9" tabindex="-1"></a><span class="co">// 3. Filtrar la región de interés para obtener solo la provincia de Cordoba (sin tilde)</span></span>
+<span id="cb41-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-10" tabindex="-1"></a><span class="kw">var</span> cordoba <span class="op">=</span> argentina<span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">eq</span>(<span class="st">&#39;ADM1_NAME&#39;</span><span class="op">,</span> <span class="st">&#39;Cordoba&#39;</span>))<span class="op">;</span></span>
+<span id="cb41-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-11" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-12" tabindex="-1"></a><span class="co">// 4. Visualizar la región de Córdoba en el mapa para verificar la geometría</span></span>
+<span id="cb41-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-13" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(cordoba<span class="op">,</span> <span class="dv">8</span>)<span class="op">;</span> <span class="co">// Centrar el mapa en Córdoba con un nivel de zoom de 8</span></span>
+<span id="cb41-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-14" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(cordoba<span class="op">,</span> {<span class="dt">color</span><span class="op">:</span> <span class="st">&#39;red&#39;</span>}<span class="op">,</span> <span class="st">&#39;Provincia de Córdoba&#39;</span>)<span class="op">;</span> <span class="co">// Añadir la capa de Córdoba al mapa en color rojo</span></span>
+<span id="cb41-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-15" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-16" tabindex="-1"></a><span class="co">// 5. Usar la función print() para mostrar la información de la variable gaulCollection</span></span>
+<span id="cb41-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-17" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Colección de límites administrativos GAUL (Argentina):&#39;</span><span class="op">,</span> argentina)<span class="op">;</span></span>
+<span id="cb41-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-18" tabindex="-1"></a></span>
+<span id="cb41-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb41-19" tabindex="-1"></a><span class="co">// 6. Usar la función print() para mostrar la información de la geometría de Córdoba</span></span></code></pre></div>
+<p>Explicación esperada:<br />
+- Se usa la colección FAO/GAUL/2015/level1 para obtener la geometría de Córdoba.<br />
+- Se aplica un filtro para seleccionar la provincia de Córdoba.<br />
+- Se usa Map.centerObject y Map.addLayer para centrar la vista en la ROI y visualizarla en rojo.<br />
+- Observa que en la Consola (Console) aparece la siguiente informacion como respuesta a la función print.</p>
+<pre><code>Colección de límites administrativos GAUL (Argentina):
+FeatureCollection FAO/GAUL/2015/level1 (24 elements, 11 columns)
+type: FeatureCollection
+id: FAO/GAUL/2015/level1
+version: 1701682593235039
+columns: Object (11 properties)
+features: List (24 elements)
+properties: Object (1 property)</code></pre>
+<p>Puedes usar esta información en ChatGPT para que te explique en qué consiste este FeatureCollection</p>
+</div>
+</div>
+<div id="paso-2-seleccionar-imágenes-modis-antes-y-después-de-los-incendios" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Paso 2: Seleccionar imágenes MODIS antes y después de los incendios<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-2-seleccionar-imágenes-modis-antes-y-después-de-los-incendios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este paso se enfoca en la obtención de las imágenes satelitales MODIS necesarias para el análisis. Se seleccionarán imágenes antes y después de los incendios forestales de Córdoba, con fechas clave de junio de 2020 (antes) y noviembre de 2020 (después). Las imágenes se filtrarán por fecha y por la región de interés (ROI) previamente definida. Además, se calculará la <strong>mediana de las imágenes</strong> para reducir el ruido en los datos.</p>
+<pre><code>Necesito seleccionar imágenes MODIS de la colección MODIS/061/MCD43A4 para analizar incendios en Córdoba, Argentina, en 2020. Sin embargo, el área procesada y visualizada debe limitarse estrictamente al ROI definido (provincia de Córdoba). Proporciona el código para filtrar las fechas y recortar las imágenes seleccionadas al ROI utilizando la función `clip`.
+1. Usa las fechas del 1 al 16 de junio de 2020 (antes del incendio) y del 16 al 30 de noviembre de 2020 (después del incendio).
+2. Aplica un recorte explícito de las imágenes al ROI después de seleccionarlas y procesarlas.
+3. Proporciona el código comentado línea por línea para que pueda entender el propósito de cada operación.
+4. Visualiza las imágenes recortadas al ROI y verifica si están limitadas correctamente.</code></pre>
+<blockquote>
+<p>Acción del estudiante: Copia el prompt en ChatGPT, observa la respuesta y ejecuta el código en GEE. Asegúrate de comprender cada paso antes de avanzar.</p>
+</blockquote>
+<hr />
+<div id="respuesta-esperada-de-chatgpt-1" class="section level4 hasAnchor" number="3.2.5.1">
+<h4><span class="header-section-number">3.2.5.1</span> Respuesta esperada de ChatGPT<a href="análisis-multitemporal-para-la-detección-de-cambios.html#respuesta-esperada-de-chatgpt-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-1" tabindex="-1"></a><span class="co">// Paso 2: Selección de imágenes MODIS y recorte al ROI</span></span>
+<span id="cb44-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-2" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-3" tabindex="-1"></a><span class="co">// 1. Cargar la colección de imágenes MODIS MCD43A4</span></span>
+<span id="cb44-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-4" tabindex="-1"></a><span class="kw">var</span> modisCollection <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">&#39;MODIS/061/MCD43A4&#39;</span>)<span class="op">;</span></span>
+<span id="cb44-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-5" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-6" tabindex="-1"></a><span class="co">// 2. Definir las fechas de interés</span></span>
+<span id="cb44-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-7" tabindex="-1"></a><span class="kw">var</span> preFireStart <span class="op">=</span> <span class="st">&#39;2020-06-01&#39;</span><span class="op">;</span> <span class="co">// Fecha de inicio para la imagen previa al incendio</span></span>
+<span id="cb44-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-8" tabindex="-1"></a><span class="kw">var</span> preFireEnd <span class="op">=</span> <span class="st">&#39;2020-06-16&#39;</span><span class="op">;</span>   <span class="co">// Fecha de fin para la imagen previa al incendio</span></span>
+<span id="cb44-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-9" tabindex="-1"></a><span class="kw">var</span> postFireStart <span class="op">=</span> <span class="st">&#39;2020-11-16&#39;</span><span class="op">;</span> <span class="co">// Fecha de inicio para la imagen posterior al incendio</span></span>
+<span id="cb44-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-10" tabindex="-1"></a><span class="kw">var</span> postFireEnd <span class="op">=</span> <span class="st">&#39;2020-11-30&#39;</span><span class="op">;</span>   <span class="co">// Fecha de fin para la imagen posterior al incendio</span></span>
+<span id="cb44-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-11" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-12" tabindex="-1"></a><span class="co">// 3. Filtrar la colección MODIS para el período previo al incendio</span></span>
+<span id="cb44-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-13" tabindex="-1"></a><span class="kw">var</span> preFireImage <span class="op">=</span> modisCollection</span>
+<span id="cb44-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-14" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(preFireStart<span class="op">,</span> preFireEnd) <span class="co">// Filtrar por fechas</span></span>
+<span id="cb44-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-15" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(cordoba) <span class="co">// Limitar la selección a la región de Córdoba</span></span>
+<span id="cb44-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-16" tabindex="-1"></a>  <span class="op">.</span><span class="fu">mean</span>() <span class="co">// Promediar las imágenes dentro de este período de tiempo</span></span>
+<span id="cb44-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-17" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(cordoba)<span class="op">;</span> <span class="co">// Recortar la imagen al área de la provincia de Córdoba</span></span>
+<span id="cb44-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-18" tabindex="-1"></a></span>
+<span id="cb44-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-19" tabindex="-1"></a><span class="co">// 4. Filtrar la colección MODIS para el período posterior al incendio</span></span>
+<span id="cb44-20"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-20" tabindex="-1"></a><span class="kw">var</span> postFireImage <span class="op">=</span> modisCollection</span>
+<span id="cb44-21"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-21" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(postFireStart<span class="op">,</span> postFireEnd) <span class="co">// Filtrar por fechas</span></span>
+<span id="cb44-22"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-22" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(cordoba) <span class="co">// Limitar la selección a la región de Córdoba</span></span>
+<span id="cb44-23"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-23" tabindex="-1"></a>  <span class="op">.</span><span class="fu">mean</span>() <span class="co">// Promediar las imágenes dentro de este período de tiempo</span></span>
+<span id="cb44-24"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-24" tabindex="-1"></a>  <span class="op">.</span><span class="fu">clip</span>(cordoba)<span class="op">;</span> <span class="co">// Recortar la imagen al área de la provincia de Córdoba</span></span>
+<span id="cb44-25"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-25" tabindex="-1"></a></span>
+<span id="cb44-26"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-26" tabindex="-1"></a><span class="co">// 5. Visualizar las imágenes recortadas al ROI para asegurarse de que estén bien limitadas</span></span>
+<span id="cb44-27"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-27" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(cordoba<span class="op">,</span> <span class="dv">8</span>)<span class="op">;</span> <span class="co">// Centrar el mapa en la región de Córdoba</span></span>
+<span id="cb44-28"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-28" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(preFireImage<span class="op">,</span> {<span class="dt">bands</span><span class="op">:</span> [<span class="st">&#39;Nadir_Reflectance_Band1&#39;</span><span class="op">,</span> <span class="st">&#39;Nadir_Reflectance_Band4&#39;</span><span class="op">,</span> <span class="st">&#39;Nadir_Reflectance_Band3&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">3000</span>}<span class="op">,</span> <span class="st">&#39;Pre-Fire Image (Jun 2020)&#39;</span>)<span class="op">;</span></span>
+<span id="cb44-29"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-29" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(postFireImage<span class="op">,</span> {<span class="dt">bands</span><span class="op">:</span> [<span class="st">&#39;Nadir_Reflectance_Band1&#39;</span><span class="op">,</span> <span class="st">&#39;Nadir_Reflectance_Band4&#39;</span><span class="op">,</span> <span class="st">&#39;Nadir_Reflectance_Band3&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">3000</span>}<span class="op">,</span> <span class="st">&#39;Post-Fire Image (Nov 2020)&#39;</span>)<span class="op">;</span></span>
+<span id="cb44-30"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-30" tabindex="-1"></a></span>
+<span id="cb44-31"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-31" tabindex="-1"></a><span class="co">// 6. Usar la función print() para inspeccionar las propiedades de las imágenes</span></span>
+<span id="cb44-32"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-32" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Imagen previa al incendio (Pre-Fire):&#39;</span><span class="op">,</span> preFireImage)<span class="op">;</span></span>
+<span id="cb44-33"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb44-33" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Imagen posterior al incendio (Post-Fire):&#39;</span><span class="op">,</span> postFireImage)<span class="op">;</span></span></code></pre></div>
+<hr />
+</div>
+<div id="explicación-del-código-para-el-paso-2-selección-de-imágenes-modis-y-recorte-al-roi" class="section level4 hasAnchor" number="3.2.5.2">
+<h4><span class="header-section-number">3.2.5.2</span> Explicación del Código para el Paso 2: Selección de Imágenes MODIS y Recorte al ROI<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-2-selección-de-imágenes-modis-y-recorte-al-roi" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>En este paso, se seleccionan las imágenes de MODIS correspondientes a los períodos antes y después de los incendios en Córdoba. Además, las imágenes se recortan al área de interés para asegurar que el análisis esté enfocado únicamente en la región afectada.</p>
+<p>Primero, se carga la colección de imágenes MODIS MCD43A4. Este producto ofrece compuestos de reflectancia de superficie cada 16 días, lo que lo hace adecuado para analizar cambios a lo largo del tiempo. Luego, se definen los rangos de fechas para las imágenes preincendio (junio de 2020) y postincendio (noviembre de 2020). Estas fechas se eligen en función de la cronología de los incendios.</p>
+<p>Las imágenes se filtran usando las fechas definidas y la región de Córdoba. Este filtrado asegura que solo se incluyan las imágenes relevantes para el análisis. Para reducir el ruido, las imágenes dentro de cada rango de fechas se promedian. Esto ayuda a obtener una representación más estable de las condiciones en cada período. Posteriormente, las imágenes se recortan al contorno exacto de la provincia de Córdoba utilizando la función <code>clip()</code>.</p>
+<p>Una vez procesadas las imágenes, se visualizan en el mapa. Las bandas seleccionadas para la visualización son <code>Nadir_Reflectance_Band1</code>, <code>Nadir_Reflectance_Band4</code> y <code>Nadir_Reflectance_Band3</code>, que corresponden a una combinación RGB adecuada para interpretar visualmente los cambios en la vegetación y el suelo.</p>
+<p>Finalmente, se utiliza la función <code>print()</code> para inspeccionar las propiedades de las imágenes generadas. Esto permite verificar aspectos como las estadísticas de las bandas, el área cubierta y la consistencia de los datos con el ROI definido.</p>
+<p>Este paso es esencial para preparar los datos antes de calcular el índice NBR, asegurando que el análisis se realice sobre imágenes representativas y correctamente recortadas al área de estudio.</p>
+<hr />
+</div>
+</div>
+<div id="paso-3-calcular-el-índice-nbr-normalized-burn-ratio" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Paso 3: Calcular el Índice NBR (Normalized Burn Ratio)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-3-calcular-el-índice-nbr-normalized-burn-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El Índice de Quemadura Normalizada (NBR) es una métrica clave para identificar áreas afectadas por incendios forestales. Este índice utiliza la relación entre las bandas NIR (infrarrojo cercano) y SWIR (infrarrojo de onda corta) para resaltar las áreas quemadas, ya que estas bandas son sensibles a los cambios en la vegetación y el suelo.</p>
+<p>En el caso de MODIS MCD43A4, las bandas necesarias para calcular el NBR son:</p>
+<ul>
+<li><code>Nadir_Reflectance_Band2</code> (NIR)</li>
+<li><code>Nadir_Reflectance_Band7</code> (SWIR)</li>
+</ul>
+<p>El NBR se calcula utilizando la fórmula:</p>
+<p><span class="math display">\[
+NBR = \frac{\text{NIR} - \text{SWIR}}{\text{NIR} + \text{SWIR}}
+\]</span></p>
+<p>Esta fórmula genera valores entre -1 y 1, donde los valores cercanos a 1 indican vegetación sana, mientras que los valores negativos o bajos reflejan áreas afectadas o no vegetadas.</p>
+<div id="prompt-para-chatgpt---paso-3" class="section level4 hasAnchor" number="3.2.6.1">
+<h4><span class="header-section-number">3.2.6.1</span> Prompt para ChatGPT - Paso 3<a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-para-chatgpt---paso-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Necesito calcular el Índice de Quemadura Normalizada (NBR) para dos imágenes MODIS: una previa y otra posterior a los incendios en Córdoba, Argentina. Usa las bandas `Nadir_Reflectance_Band2` (NIR) y `Nadir_Reflectance_Band7` (SWIR) para calcular el NBR. Proporciona el código paso a paso para calcular este índice para ambas imágenes y explícalo línea por línea.</code></pre>
+<hr />
+</div>
+<div id="código-generado-para-el-paso-3" class="section level4 hasAnchor" number="3.2.6.2">
+<h4><span class="header-section-number">3.2.6.2</span> Código Generado para el Paso 3<a href="análisis-multitemporal-para-la-detección-de-cambios.html#código-generado-para-el-paso-3" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-1" tabindex="-1"></a><span class="co">// Paso 3: Calcular el Índice de Quemadura Normalizada (NBR)</span></span>
+<span id="cb46-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-2" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-3" tabindex="-1"></a><span class="co">// 1. Calcular el NBR para la imagen previa al incendio</span></span>
+<span id="cb46-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-4" tabindex="-1"></a><span class="kw">var</span> preFireNBR <span class="op">=</span> preFireImage<span class="op">.</span><span class="fu">expression</span>(</span>
+<span id="cb46-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-5" tabindex="-1"></a>  <span class="st">&#39;(NIR - SWIR) / (NIR + SWIR)&#39;</span><span class="op">,</span> <span class="co">// Fórmula para el cálculo de NBR</span></span>
+<span id="cb46-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-6" tabindex="-1"></a>  {</span>
+<span id="cb46-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-7" tabindex="-1"></a>    <span class="st">&#39;NIR&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band2&#39;</span>)<span class="op">,</span> <span class="co">// Banda NIR de MODIS</span></span>
+<span id="cb46-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-8" tabindex="-1"></a>    <span class="st">&#39;SWIR&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band7&#39;</span>) <span class="co">// Banda SWIR de MODIS</span></span>
+<span id="cb46-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-9" tabindex="-1"></a>  }</span>
+<span id="cb46-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-10" tabindex="-1"></a>)<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;NBR_PreFire&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda para identificarla claramente</span></span>
+<span id="cb46-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-11" tabindex="-1"></a></span>
+<span id="cb46-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-12" tabindex="-1"></a><span class="co">// 2. Calcular el NBR para la imagen posterior al incendio</span></span>
+<span id="cb46-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-13" tabindex="-1"></a><span class="kw">var</span> postFireNBR <span class="op">=</span> postFireImage<span class="op">.</span><span class="fu">expression</span>(</span>
+<span id="cb46-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-14" tabindex="-1"></a>  <span class="st">&#39;(NIR - SWIR) / (NIR + SWIR)&#39;</span><span class="op">,</span> <span class="co">// Fórmula para el cálculo de NBR</span></span>
+<span id="cb46-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-15" tabindex="-1"></a>  {</span>
+<span id="cb46-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-16" tabindex="-1"></a>    <span class="st">&#39;NIR&#39;</span><span class="op">:</span> postFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band2&#39;</span>)<span class="op">,</span> <span class="co">// Banda NIR de MODIS</span></span>
+<span id="cb46-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-17" tabindex="-1"></a>    <span class="st">&#39;SWIR&#39;</span><span class="op">:</span> postFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band7&#39;</span>) <span class="co">// Banda SWIR de MODIS</span></span>
+<span id="cb46-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-18" tabindex="-1"></a>  }</span>
+<span id="cb46-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-19" tabindex="-1"></a>)<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;NBR_PostFire&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda para identificarla claramente</span></span>
+<span id="cb46-20"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-20" tabindex="-1"></a></span>
+<span id="cb46-21"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-21" tabindex="-1"></a><span class="co">// 3. Visualizar el NBR antes y después del incendio en el mapa</span></span>
+<span id="cb46-22"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-22" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(cordoba<span class="op">,</span> <span class="dv">8</span>)<span class="op">;</span> <span class="co">// Centrar el mapa en la región de Córdoba</span></span>
+<span id="cb46-23"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-23" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(preFireNBR<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;white&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span>]}<span class="op">,</span> <span class="st">&#39;NBR Antes del Incendio (Jun 2020)&#39;</span>)<span class="op">;</span></span>
+<span id="cb46-24"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-24" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(postFireNBR<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;white&#39;</span><span class="op">,</span> <span class="st">&#39;green&#39;</span>]}<span class="op">,</span> <span class="st">&#39;NBR Después del Incendio (Nov 2020)&#39;</span>)<span class="op">;</span></span>
+<span id="cb46-25"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-25" tabindex="-1"></a></span>
+<span id="cb46-26"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-26" tabindex="-1"></a><span class="co">// 4. Imprimir la información de los NBRs para inspeccionar propiedades</span></span>
+<span id="cb46-27"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-27" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;NBR previo al incendio:&#39;</span><span class="op">,</span> preFireNBR)<span class="op">;</span></span>
+<span id="cb46-28"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb46-28" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;NBR posterior al incendio:&#39;</span><span class="op">,</span> postFireNBR)<span class="op">;</span></span></code></pre></div>
+<hr />
+</div>
+<div id="explicación-del-código-para-el-paso-3-calcular-el-índice-de-quemadura-normalizada-nbr" class="section level4 hasAnchor" number="3.2.6.3">
+<h4><span class="header-section-number">3.2.6.3</span> Explicación del Código para el Paso 3: Calcular el Índice de Quemadura Normalizada (NBR)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-3-calcular-el-índice-de-quemadura-normalizada-nbr" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>En este paso, se calcula el Índice de Quemadura Normalizada (NBR) para las imágenes antes y después de los incendios en Córdoba. El NBR es un índice clave para detectar cambios en la vegetación y el suelo, siendo particularmente útil para identificar áreas quemadas.</p>
+<p>La fórmula utilizada para calcular el NBR es:</p>
+<p><span class="math display">\[
+NBR = \frac{\text{NIR} - \text{SWIR}}{\text{NIR} + \text{SWIR}}
+\]</span></p>
+<p>Para este análisis, se utilizan las bandas de reflectancia de MODIS:
+- <strong>NIR:</strong> <code>Nadir_Reflectance_Band2</code> (Infrarrojo cercano).
+- <strong>SWIR:</strong> <code>Nadir_Reflectance_Band7</code> (Infrarrojo de onda corta).</p>
+<p>El cálculo del NBR se realiza mediante la función <code>expression()</code>, que permite aplicar la fórmula a cada píxel de la imagen. Este proceso se aplica por separado a las imágenes previas y posteriores al incendio. Cada resultado se renombra para identificar claramente el período correspondiente (<code>NBR_PreFire</code> y <code>NBR_PostFire</code>).</p>
+<p>Después de calcular el NBR, las imágenes se visualizan en el mapa. Para ello, se utiliza una paleta de colores:
+- Azul: Valores bajos (suelo desnudo, agua).
+- Blanco: Valores intermedios.
+- Verde: Valores altos (vegetación saludable).</p>
+<p>Esta representación permite interpretar visualmente las condiciones de la vegetación antes y después del evento. Finalmente, la función <code>print()</code> se utiliza para inspeccionar las propiedades de las imágenes NBR generadas, facilitando la validación y el control de calidad de los datos.</p>
+<hr />
+</div>
+</div>
+<div id="paso-4-calcular-la-diferencia-de-nbr-dnbr" class="section level3 hasAnchor" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> Paso 4: Calcular la Diferencia de NBR (dNBR)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-4-calcular-la-diferencia-de-nbr-dnbr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El siguiente paso en el análisis es calcular la diferencia de NBR (dNBR), que es esencial para identificar las áreas quemadas. El dNBR se calcula restando el NBR posterior al incendio del NBR previo al incendio. Este indicador resalta los cambios en la vegetación y el suelo debido al fuego.</p>
+<div id="prompt" class="section level4 hasAnchor" number="3.2.7.1">
+<h4><span class="header-section-number">3.2.7.1</span> Prompt:<a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Necesito calcular la diferencia de NBR (dNBR) para identificar las áreas quemadas en Córdoba, Argentina, durante los incendios de 2020. Usa las imágenes NBR previas y posteriores al incendio calculadas en el paso anterior. Proporciona el código para:
+1. Calcular el dNBR restando el NBR posterior al incendio del NBR previo.
+2. Asignar un nombre claro a la nueva banda.
+3. Visualizar el dNBR en el mapa usando una paleta de colores adecuada.
+4. Explica cada línea del código con comentarios para entender su propósito.</code></pre>
+<blockquote>
+<p>Copia este prompt en ChatGPT y utiliza el código generado para continuar con el análisis en GEE. Asegúrate de que la visualización en el mapa sea clara y verifica los valores generados del dNBR para interpretar las áreas quemadas.</p>
+</blockquote>
+</div>
+<div id="explicación-del-código-para-el-paso-4-calcular-la-diferencia-de-nbr-dnbr" class="section level4 hasAnchor" number="3.2.7.2">
+<h4><span class="header-section-number">3.2.7.2</span> Explicación del Código para el Paso 4: Calcular la Diferencia de NBR (dNBR)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-4-calcular-la-diferencia-de-nbr-dnbr" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>En este paso, se calcula la Diferencia de NBR (dNBR), que es una métrica clave para identificar las áreas afectadas por incendios forestales. El dNBR mide la variación en el Índice de Quemadura Normalizada (NBR) entre los períodos previos y posteriores al incendio, destacando los cambios significativos en la vegetación y el suelo.</p>
+<p>La fórmula para calcular el dNBR es:</p>
+<p><span class="math display">\[
+dNBR = NBR_{\text{Pre}} - NBR_{\text{Post}}
+\]</span></p>
+</div>
+<div id="componentes-principales-del-código" class="section level4 hasAnchor" number="3.2.7.3">
+<h4><span class="header-section-number">3.2.7.3</span> Componentes principales del código:<a href="análisis-multitemporal-para-la-detección-de-cambios.html#componentes-principales-del-código" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><p><strong>Cálculo del dNBR</strong>:<br />
+Se utiliza la función <code>subtract()</code> para restar el NBR posterior del NBR previo. Esto genera una nueva imagen en la que cada píxel representa la magnitud del cambio en el NBR. Los valores altos indican áreas con mayor impacto por el incendio, mientras que los valores bajos o negativos indican áreas con pocos cambios o regeneración.</p></li>
+<li><p><strong>Renombrar la banda</strong>:<br />
+La nueva banda generada se renombra como <code>dNBR</code> para identificarla claramente en el análisis.</p></li>
+<li><p><strong>Visualización en el mapa</strong>:<br />
+Se agrega la imagen de dNBR al mapa con una paleta de colores específica:</p>
+<ul>
+<li><strong>Azul</strong>: Valores bajos, que representan áreas sin cambios significativos.</li>
+<li><strong>Blanco</strong>: Valores intermedios, donde hubo cambios moderados.</li>
+<li><strong>Rojo</strong>: Valores altos, que representan áreas severamente quemadas.</li>
+</ul></li>
+<li><p><strong>Inspección de propiedades</strong>:<br />
+Se utiliza la función <code>print()</code> para explorar las propiedades de la imagen de dNBR, como el rango de valores y las estadísticas de píxeles, lo que permite verificar que el cálculo sea correcto.</p></li>
+</ol>
+<p>Este paso es crucial porque el dNBR proporciona información directa sobre la severidad y la extensión del impacto del incendio en la región de interés (ROI). Con esta información, se pueden realizar análisis más detallados, como la creación de máscaras de áreas quemadas en pasos posteriores.</p>
+<hr />
+</div>
+</div>
+<div id="paso-5-crear-una-máscara-de-áreas-quemadas" class="section level3 hasAnchor" number="3.2.8">
+<h3><span class="header-section-number">3.2.8</span> Paso 5: Crear una Máscara de Áreas Quemadas<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-5-crear-una-máscara-de-áreas-quemadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En este paso, el objetivo es identificar las áreas quemadas utilizando la diferencia de NBR (dNBR). Esto se logra aplicando un umbral (threshold) que separe los píxeles afectados por el incendio de los que no lo están. Este umbral es clave y puede variar dependiendo de las características del área y de los datos. Por lo tanto, se invita al usuario a experimentar con diferentes valores para determinar el threshold óptimo.</p>
+<pre><code>Quiero crear una máscara de las áreas quemadas utilizando el índice dNBR calculado previamente. Necesito un fragmento de código que me permita aplicar un umbral inicial de dNBR &gt; 0.66 para identificar áreas severamente afectadas por el incendio. También quiero que el código sea flexible, de modo que pueda probar diferentes valores de threshold para ajustar la detección. Proporciona el código comentado y explica cómo ajustar el umbral.</code></pre>
+<blockquote>
+<p>Acción del estudiante: Copia este prompt en ChatGPT, utiliza el código generado en Google Earth Engine, y ajusta el threshold para evaluar los resultados visuales.</p>
+</blockquote>
+<hr />
+<div id="código-generado-para-el-paso-5" class="section level4 hasAnchor" number="3.2.8.1">
+<h4><span class="header-section-number">3.2.8.1</span> Código Generado para el Paso 5<a href="análisis-multitemporal-para-la-detección-de-cambios.html#código-generado-para-el-paso-5" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb49"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb49-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-1" tabindex="-1"></a><span class="co">// Paso 5: Crear una máscara de las áreas quemadas utilizando el umbral de dNBR</span></span>
+<span id="cb49-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-3" tabindex="-1"></a><span class="co">// 1. Definir el umbral para la detección de áreas quemadas (puedes cambiar este valor)</span></span>
+<span id="cb49-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-4" tabindex="-1"></a><span class="kw">var</span> threshold <span class="op">=</span> <span class="fl">0.66</span><span class="op">;</span> <span class="co">// Umbral para identificar áreas quemadas (puedes modificar este valor)</span></span>
+<span id="cb49-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-5" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-6" tabindex="-1"></a><span class="co">// 2. Crear la máscara de áreas quemadas (1 = quemada, 0 = no quemada)</span></span>
+<span id="cb49-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-7" tabindex="-1"></a><span class="kw">var</span> burnedAreaMask <span class="op">=</span> dNBR<span class="op">.</span><span class="fu">gt</span>(threshold) <span class="co">// Comparar dNBR con el umbral</span></span>
+<span id="cb49-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-8" tabindex="-1"></a>  <span class="op">.</span><span class="fu">selfMask</span>() <span class="co">// Ocultar píxeles que no cumplan la condición (dNBR &lt;= threshold)</span></span>
+<span id="cb49-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-9" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;Burned_Areas&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda resultante como &#39;Burned_Areas&#39;</span></span>
+<span id="cb49-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-10" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-11" tabindex="-1"></a><span class="co">// 3. Visualizar la máscara de áreas quemadas en el mapa</span></span>
+<span id="cb49-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-12" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">centerObject</span>(cordoba<span class="op">,</span> <span class="dv">8</span>)<span class="op">;</span> <span class="co">// Centrar el mapa en la región de Córdoba</span></span>
+<span id="cb49-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-13" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(burnedAreaMask<span class="op">,</span> </span>
+<span id="cb49-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-14" tabindex="-1"></a>  {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> </span>
+<span id="cb49-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-15" tabindex="-1"></a>  <span class="st">&#39;Máscara de Áreas Quemadas (dNBR &gt; &#39;</span> <span class="op">+</span> threshold <span class="op">+</span> <span class="st">&#39;)&#39;</span></span>
+<span id="cb49-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-16" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb49-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-17" tabindex="-1"></a></span>
+<span id="cb49-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-18" tabindex="-1"></a><span class="co">// 4. Imprimir la información de la máscara para inspeccionar sus propiedades</span></span>
+<span id="cb49-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb49-19" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Máscara de Áreas Quemadas (dNBR &gt; &#39;</span> <span class="op">+</span> threshold <span class="op">+</span> <span class="st">&#39;):&#39;</span><span class="op">,</span> burnedAreaMask)<span class="op">;</span></span></code></pre></div>
+<hr />
+</div>
+<div id="explicación-del-código-para-el-paso-5-crear-una-máscara-de-áreas-quemadas" class="section level4 hasAnchor" number="3.2.8.2">
+<h4><span class="header-section-number">3.2.8.2</span> Explicación del Código para el Paso 5: Crear una Máscara de Áreas Quemadas<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-5-crear-una-máscara-de-áreas-quemadas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Este paso se enfoca en identificar y visualizar las áreas quemadas aplicando un umbral a la diferencia de NBR (dNBR). La máscara generada es esencial para destacar los píxeles que cumplen con el criterio de cambio significativo tras los incendios.</p>
+</div>
+<div id="concepto-del-umbral-threshold" class="section level4 hasAnchor" number="3.2.8.3">
+<h4><span class="header-section-number">3.2.8.3</span> Concepto del Umbral (Threshold)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#concepto-del-umbral-threshold" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>El umbral define qué tan afectado debe estar un píxel para ser clasificado como quemado. En este ejemplo, el valor inicial de 0.66 se usa como referencia para detectar áreas severamente afectadas. El umbral puede ajustarse para incluir áreas con diferentes niveles de daño.</p>
+</div>
+<div id="componentes-del-código" class="section level4 hasAnchor" number="3.2.8.4">
+<h4><span class="header-section-number">3.2.8.4</span> Componentes del Código:<a href="análisis-multitemporal-para-la-detección-de-cambios.html#componentes-del-código" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li><strong>Definición del umbral (<code>threshold</code>)</strong>:
+<ul>
+<li>El valor inicial se establece en 0.66, pero el usuario tiene la flexibilidad de modificar este valor para evaluar diferentes niveles de afectación. Valores más bajos incluirán áreas con menor daño, mientras que valores más altos se enfocarán en áreas con afectación severa.</li>
+</ul></li>
+<li><strong>Creación de la máscara binaria</strong>:
+<ul>
+<li>La función <code>gt(threshold)</code> compara cada píxel de dNBR con el umbral. Los píxeles que cumplen la condición (dNBR &gt; threshold) se establecen en 1, mientras que los demás se establecen en 0.<br />
+</li>
+<li><code>selfMask()</code> oculta los píxeles que no cumplen la condición, lo que mejora la visualización.</li>
+</ul></li>
+<li><strong>Renombrar la banda</strong>:
+<ul>
+<li>Se utiliza <code>.rename('Burned_Areas')</code> para asignar un nombre descriptivo a la banda, facilitando su interpretación y uso posterior.</li>
+</ul></li>
+<li><strong>Visualización de la máscara</strong>:
+<ul>
+<li>La máscara se muestra en el mapa con una paleta roja (<code>palette: ['red']</code>), destacando claramente las áreas quemadas.<br />
+</li>
+<li>El título de la capa incluye el valor del umbral utilizado, lo que ayuda a rastrear diferentes configuraciones durante el análisis.</li>
+</ul></li>
+<li><strong>Validación mediante inspección</strong>:
+<ul>
+<li>La función <code>print()</code> permite inspeccionar las propiedades de la máscara generada, como su extensión, estadísticas y geometría, ayudando a verificar la calidad del resultado.</li>
+</ul></li>
+</ol>
+</div>
+<div id="ajustes-del-umbral" class="section level4 hasAnchor" number="3.2.8.5">
+<h4><span class="header-section-number">3.2.8.5</span> Ajustes del Umbral<a href="análisis-multitemporal-para-la-detección-de-cambios.html#ajustes-del-umbral" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Se invita al usuario a experimentar con diferentes valores de <code>threshold</code> (por ejemplo, 0.4, 0.6, 0.8) para evaluar cómo cambia la detección de áreas quemadas. Esto es crucial para optimizar la identificación de las áreas afectadas según el contexto del análisis.</p>
+</div>
+<div id="resultado-esperado" class="section level4 hasAnchor" number="3.2.8.6">
+<h4><span class="header-section-number">3.2.8.6</span> Resultado Esperado<a href="análisis-multitemporal-para-la-detección-de-cambios.html#resultado-esperado" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La máscara generada resalta las áreas quemadas en rojo, permitiendo una interpretación visual inmediata. Este resultado prepara el camino para calcular la superficie total quemada y realizar análisis adicionales en los siguientes pasos.</p>
+<hr />
+</div>
+</div>
+<div id="paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua" class="section level3 hasAnchor" number="3.2.9">
+<h3><span class="header-section-number">3.2.9</span> Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En este paso, se mejora la identificación de áreas quemadas excluyendo los cuerpos de agua. Esto es fundamental, ya que los cuerpos de agua pueden tener valores de dNBR que se asemejan a los de áreas quemadas, generando falsos positivos. Para resolver este problema, se creará una máscara adicional que detecte los cuerpos de agua y se utilizará para excluirlos de la máscara de áreas quemadas.</p>
+<div id="objetivo" class="section level4 hasAnchor" number="3.2.9.1">
+<h4><span class="header-section-number">3.2.9.1</span> Objetivo<a href="análisis-multitemporal-para-la-detección-de-cambios.html#objetivo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Detectar los cuerpos de agua en la región de interés.</li>
+<li>Crear una máscara de agua y superponerla a la máscara de áreas quemadas.</li>
+<li>Generar una máscara combinada que solo contenga áreas quemadas excluyendo los cuerpos de agua.</li>
+</ol>
+</div>
+<div id="prompt-para-chatgpt---paso-5-mejorado-con-la-exclusión-de-cuerpos-de-agua" class="section level4 hasAnchor" number="3.2.9.2">
+<h4><span class="header-section-number">3.2.9.2</span> Prompt para ChatGPT - Paso 5 (Mejorado con la exclusión de cuerpos de agua)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#prompt-para-chatgpt---paso-5-mejorado-con-la-exclusión-de-cuerpos-de-agua" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Quiero mejorar la máscara de áreas quemadas utilizando la diferencia de NBR (dNBR). Necesito que primero identifiques los cuerpos de agua dentro de la región de interés y generes una máscara de agua. Luego, utiliza esta máscara de agua para eliminar las áreas de agua de la máscara de áreas quemadas. Proporciona el código necesario para crear la máscara de agua y combinarla con la máscara de áreas quemadas. Explica cada línea del código. 
+
+Ten en cuenta que este es el código hasta aquí:
+
+// Paso 1: Definir la región de interés (ROI)
+
+// 1. Cargar la colección de límites administrativos GAUL de FAO (nivel 1 - provincias/estados)
+var gaulCollection = ee.FeatureCollection(&#39;FAO/GAUL/2015/level1&#39;);
+
+// 2. Filtrar la colección para seleccionar solo las entidades correspondientes a Argentina
+var argentina = gaulCollection.filter(ee.Filter.eq(&#39;ADM0_NAME&#39;, &#39;Argentina&#39;));
+
+// 3. Filtrar la región de interés para obtener solo la provincia de Cordoba (sin tilde)
+var cordoba = argentina.filter(ee.Filter.eq(&#39;ADM1_NAME&#39;, &#39;Cordoba&#39;));
+
+// 4. Visualizar la región de Córdoba en el mapa para verificar la geometría
+Map.centerObject(cordoba, 8); // Centrar el mapa en Córdoba con un nivel de zoom de 8
+Map.addLayer(cordoba, {color: &#39;red&#39;}, &#39;Provincia de Córdoba&#39;); // Añadir la capa de Córdoba al mapa en color rojo
+
+// 5. Usar la función print() para mostrar la información de la variable gaulCollection
+print(&#39;Colección de límites administrativos GAUL (Argentina):&#39;, argentina);
+
+// 6. Usar la función print() para mostrar la información de la geometría de Córdoba
+print(&#39;Geometría de la Provincia de Córdoba:&#39;, cordoba);
+
+// Paso 2: Selección de imágenes MODIS y recorte al ROI
+
+// 1. Cargar la colección de imágenes MODIS MCD43A4
+var modisCollection = ee.ImageCollection(&#39;MODIS/061/MCD43A4&#39;);
+
+// 2. Definir las fechas de interés
+var preFireStart = &#39;2020-06-01&#39;; // Fecha de inicio para la imagen previa al incendio
+var preFireEnd = &#39;2020-06-16&#39;;   // Fecha de fin para la imagen previa al incendio
+var postFireStart = &#39;2020-11-16&#39;; // Fecha de inicio para la imagen posterior al incendio
+var postFireEnd = &#39;2020-11-30&#39;;   // Fecha de fin para la imagen posterior al incendio
+
+// 3. Filtrar la colección MODIS para el período previo al incendio
+var preFireImage = modisCollection
+  .filterDate(preFireStart, preFireEnd) // Filtrar por fechas
+  .filterBounds(cordoba) // Limitar la selección a la región de Córdoba
+  .mean() // Promediar las imágenes dentro de este período de tiempo
+  .clip(cordoba); // Recortar la imagen al área de la provincia de Córdoba
+
+// 4. Filtrar la colección MODIS para el período posterior al incendio
+var postFireImage = modisCollection
+  .filterDate(postFireStart, postFireEnd) // Filtrar por fechas
+  .filterBounds(cordoba) // Limitar la selección a la región de Córdoba
+  .mean() // Promediar las imágenes dentro de este período de tiempo
+  .clip(cordoba); // Recortar la imagen al área de la provincia de Córdoba
+
+// 5. Visualizar las imágenes recortadas al ROI para asegurarse de que estén bien limitadas
+Map.centerObject(cordoba, 8); // Centrar el mapa en la región de Córdoba
+Map.addLayer(preFireImage, {bands: [&#39;Nadir_Reflectance_Band1&#39;, &#39;Nadir_Reflectance_Band4&#39;, &#39;Nadir_Reflectance_Band3&#39;], min: 0, max: 3000}, &#39;Pre-Fire Image (Jun 2020)&#39;);
+Map.addLayer(postFireImage, {bands: [&#39;Nadir_Reflectance_Band1&#39;, &#39;Nadir_Reflectance_Band4&#39;, &#39;Nadir_Reflectance_Band3&#39;], min: 0, max: 3000}, &#39;Post-Fire Image (Nov 2020)&#39;);
+
+// 6. Usar la función print() para inspeccionar las propiedades de las imágenes
+print(&#39;Imagen previa al incendio (Pre-Fire):&#39;, preFireImage);
+print(&#39;Imagen posterior al incendio (Post-Fire):&#39;, postFireImage);
+
+// Paso 3: Calcular el Índice de Quemadura Normalizada (NBR)
+
+// 1. Calcular el NBR para la imagen previa al incendio
+var preFireNBR = preFireImage.expression(
+  &#39;(NIR - SWIR) / (NIR + SWIR)&#39;, // Fórmula para el cálculo de NBR
+  {
+    &#39;NIR&#39;: preFireImage.select(&#39;Nadir_Reflectance_Band2&#39;), // Banda NIR de MODIS
+    &#39;SWIR&#39;: preFireImage.select(&#39;Nadir_Reflectance_Band7&#39;) // Banda SWIR de MODIS
+  }
+).rename(&#39;NBR_PreFire&#39;); // Renombrar la banda para identificarla claramente
+
+// 2. Calcular el NBR para la imagen posterior al incendio
+var postFireNBR = postFireImage.expression(
+  &#39;(NIR - SWIR) / (NIR + SWIR)&#39;, // Fórmula para el cálculo de NBR
+  {
+    &#39;NIR&#39;: postFireImage.select(&#39;Nadir_Reflectance_Band2&#39;), // Banda NIR de MODIS
+    &#39;SWIR&#39;: postFireImage.select(&#39;Nadir_Reflectance_Band7&#39;) // Banda SWIR de MODIS
+  }
+).rename(&#39;NBR_PostFire&#39;); // Renombrar la banda para identificarla claramente
+
+// 3. Visualizar el NBR antes y después del incendio en el mapa
+Map.centerObject(cordoba, 8); // Centrar el mapa en la región de Córdoba
+Map.addLayer(preFireNBR, {min: -1, max: 1, palette: [&#39;blue&#39;, &#39;white&#39;, &#39;green&#39;]}, &#39;NBR Antes del Incendio (Jun 2020)&#39;);
+Map.addLayer(postFireNBR, {min: -1, max: 1, palette: [&#39;blue&#39;, &#39;white&#39;, &#39;red&#39;]}, &#39;NBR Después del Incendio (Nov 2020)&#39;);
+
+// 4. Imprimir la información de los NBRs para inspeccionar propiedades
+print(&#39;NBR previo al incendio:&#39;, preFireNBR);
+print(&#39;NBR posterior al incendio:&#39;, postFireNBR);
+
+// Paso 4: Calcular la diferencia de NBR (dNBR) para identificar áreas quemadas
+
+// 1. Calcular la diferencia de NBR (dNBR) como la resta entre NBR previo y NBR posterior
+var dNBR = preFireNBR.subtract(postFireNBR) // Restar el NBR posterior al NBR previo
+  .rename(&#39;dNBR&#39;); // Renombrar la banda resultante como &#39;dNBR&#39;
+
+// 2. Visualizar la dNBR en el mapa
+Map.centerObject(cordoba, 8); // Centrar el mapa en Córdoba con un zoom de nivel 8
+Map.addLayer(dNBR, 
+  {min: -1, max: 1, palette: [&#39;blue&#39;, &#39;white&#39;, &#39;red&#39;]}, 
+  &#39;dNBR (Diferencia de NBR)&#39;
+);
+
+// 3. Imprimir la información de la dNBR para inspeccionar sus propiedades
+print(&#39;Diferencia de NBR (dNBR):&#39;, dNBR);
+
+// Paso 5: Crear una máscara de las áreas quemadas utilizando el umbral de dNBR
+
+// 1. Definir el umbral para la detección de áreas quemadas (puedes cambiar este valor)
+var threshold = 0.4; // Umbral para identificar áreas quemadas (puedes modificar este valor)
+
+// 2. Crear la máscara de áreas quemadas (1 = quemada, 0 = no quemada)
+var burnedAreaMask = dNBR.gt(threshold) // Comparar dNBR con el umbral
+  .selfMask() // Ocultar píxeles que no cumplan la condición (dNBR &lt;= threshold)
+  .rename(&#39;Burned_Areas&#39;); // Renombrar la banda resultante como &#39;Burned_Areas&#39;
+
+// 3. Visualizar la máscara de áreas quemadas en el mapa
+Map.centerObject(cordoba, 8); // Centrar el mapa en la región de Córdoba
+Map.addLayer(burnedAreaMask, 
+  {palette: [&#39;red&#39;], min: 0, max: 1}, 
+  &#39;Máscara de Áreas Quemadas (dNBR &gt; &#39; + threshold + &#39;)&#39;
+);
+
+// 4. Imprimir la información de la máscara para inspeccionar sus propiedades
+print(&#39;Máscara de Áreas Quemadas (dNBR &gt; &#39; + threshold + &#39;):&#39;, burnedAreaMask);</code></pre>
+<blockquote>
+<p><strong>Nota para el estudiante</strong>: A veces debemos recordarle a ChatGPT cuales han sido sus respuestas anteriores para que sea consistente con las respuestas siguientes. En este caso se incluye el código que ya ha generado para que considere cualquier modificacion que nosotros hayamos hecho</p>
+</blockquote>
+</div>
+<div id="resultado-esperado-1" class="section level4 hasAnchor" number="3.2.9.3">
+<h4><span class="header-section-number">3.2.9.3</span> Resultado esperado<a href="análisis-multitemporal-para-la-detección-de-cambios.html#resultado-esperado-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb51"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb51-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-1" tabindex="-1"></a><span class="co">// Paso 6: Identificación de cuerpos de agua y exclusión de la máscara de áreas quemadas</span></span>
+<span id="cb51-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-2" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-3" tabindex="-1"></a><span class="co">// 1. Calcular el Índice de Agua Diferenciado Normalizado (NDWI) para identificar cuerpos de agua</span></span>
+<span id="cb51-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-4" tabindex="-1"></a><span class="kw">var</span> ndwi <span class="op">=</span> preFireImage<span class="op">.</span><span class="fu">expression</span>(</span>
+<span id="cb51-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-5" tabindex="-1"></a>  <span class="st">&#39;(GREEN - NIR) / (GREEN + NIR)&#39;</span><span class="op">,</span> <span class="co">// Fórmula para el cálculo de NDWI</span></span>
+<span id="cb51-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-6" tabindex="-1"></a>  {</span>
+<span id="cb51-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-7" tabindex="-1"></a>    <span class="st">&#39;GREEN&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band4&#39;</span>)<span class="op">,</span> <span class="co">// Banda Verde (MODIS)</span></span>
+<span id="cb51-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-8" tabindex="-1"></a>    <span class="st">&#39;NIR&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band2&#39;</span>) <span class="co">// Banda NIR (MODIS)</span></span>
+<span id="cb51-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-9" tabindex="-1"></a>  }</span>
+<span id="cb51-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-10" tabindex="-1"></a>)<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;NDWI&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda resultante como &#39;NDWI&#39;</span></span>
+<span id="cb51-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-11" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-12" tabindex="-1"></a><span class="co">// 2. Definir el umbral para identificar cuerpos de agua</span></span>
+<span id="cb51-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-13" tabindex="-1"></a><span class="kw">var</span> waterThreshold <span class="op">=</span> <span class="fl">0.2</span><span class="op">;</span> <span class="co">// Umbral para la detección de cuerpos de agua (puedes cambiar este valor)</span></span>
+<span id="cb51-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-14" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-15" tabindex="-1"></a><span class="co">// 3. Crear la máscara de agua (1 = agua, 0 = no agua)</span></span>
+<span id="cb51-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-16" tabindex="-1"></a><span class="kw">var</span> waterMask <span class="op">=</span> ndwi<span class="op">.</span><span class="fu">gt</span>(waterThreshold) <span class="co">// Identificar píxeles de agua (NDWI &gt; 0.2)</span></span>
+<span id="cb51-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-17" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;Water_Mask&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda para identificarla claramente</span></span>
+<span id="cb51-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-18" tabindex="-1"></a></span>
+<span id="cb51-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-19" tabindex="-1"></a><span class="co">// 4. Visualizar la máscara de agua en el mapa</span></span>
+<span id="cb51-20"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-20" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(waterMask<span class="op">,</span> </span>
+<span id="cb51-21"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-21" tabindex="-1"></a>  {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> </span>
+<span id="cb51-22"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-22" tabindex="-1"></a>  <span class="st">&#39;Máscara de Cuerpos de Agua (NDWI &gt; &#39;</span> <span class="op">+</span> waterThreshold <span class="op">+</span> <span class="st">&#39;)&#39;</span></span>
+<span id="cb51-23"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-23" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb51-24"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-24" tabindex="-1"></a></span>
+<span id="cb51-25"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-25" tabindex="-1"></a><span class="co">// 5. Imprimir la información de la máscara de agua</span></span>
+<span id="cb51-26"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-26" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Máscara de Agua (NDWI &gt; &#39;</span> <span class="op">+</span> waterThreshold <span class="op">+</span> <span class="st">&#39;):&#39;</span><span class="op">,</span> waterMask)<span class="op">;</span></span>
+<span id="cb51-27"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-27" tabindex="-1"></a></span>
+<span id="cb51-28"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-28" tabindex="-1"></a><span class="co">// 6. Visualizar la máscara de áreas quemadas antes de aplicar la máscara de agua</span></span>
+<span id="cb51-29"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-29" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(burnedAreaMask<span class="op">,</span> </span>
+<span id="cb51-30"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-30" tabindex="-1"></a>  {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> </span>
+<span id="cb51-31"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-31" tabindex="-1"></a>  <span class="st">&#39;Máscara de Áreas Quemadas (antes de excluir agua)&#39;</span></span>
+<span id="cb51-32"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-32" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb51-33"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-33" tabindex="-1"></a></span>
+<span id="cb51-34"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-34" tabindex="-1"></a><span class="co">// 7. Crear una máscara lógica que combine la máscara de áreas quemadas y la máscara de agua</span></span>
+<span id="cb51-35"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-35" tabindex="-1"></a><span class="kw">var</span> refinedBurnedAreaMask <span class="op">=</span> burnedAreaMask<span class="op">.</span><span class="fu">and</span>(waterMask<span class="op">.</span><span class="fu">not</span>()) <span class="co">// Áreas quemadas que NO están en el agua</span></span>
+<span id="cb51-36"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-36" tabindex="-1"></a>  <span class="op">.</span><span class="fu">selfMask</span>() <span class="co">// Ocultar píxeles donde la condición no se cumple (quedan NoData)</span></span>
+<span id="cb51-37"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-37" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;Refined_Burned_Areas&#39;</span>)<span class="op">;</span> <span class="co">// Renombrar la banda para identificarla claramente</span></span>
+<span id="cb51-38"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-38" tabindex="-1"></a></span>
+<span id="cb51-39"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-39" tabindex="-1"></a><span class="co">// 8. Visualizar la máscara de áreas quemadas refinada (sin agua)</span></span>
+<span id="cb51-40"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-40" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(refinedBurnedAreaMask<span class="op">,</span> </span>
+<span id="cb51-41"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-41" tabindex="-1"></a>  {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> </span>
+<span id="cb51-42"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-42" tabindex="-1"></a>  <span class="st">&#39;Máscara de Áreas Quemadas Refinada (sin agua)&#39;</span></span>
+<span id="cb51-43"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-43" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb51-44"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-44" tabindex="-1"></a></span>
+<span id="cb51-45"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-45" tabindex="-1"></a><span class="co">// 9. Imprimir la información de la máscara de áreas quemadas refinada</span></span>
+<span id="cb51-46"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-46" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Máscara de Áreas Quemadas Refinada (sin agua):&#39;</span><span class="op">,</span> refinedBurnedAreaMask)<span class="op">;</span></span>
+<span id="cb51-47"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-47" tabindex="-1"></a></span>
+<span id="cb51-48"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-48" tabindex="-1"></a><span class="co">// 10. Verificar la intersección de las áreas de agua y las áreas quemadas</span></span>
+<span id="cb51-49"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-49" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(waterMask<span class="op">,</span> {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> <span class="st">&#39;Máscara de Agua&#39;</span>)<span class="op">;</span></span>
+<span id="cb51-50"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-50" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(dNBR<span class="op">,</span> {<span class="dt">min</span><span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span><span class="op">,</span> <span class="st">&#39;white&#39;</span><span class="op">,</span> <span class="st">&#39;red&#39;</span>]}<span class="op">,</span> <span class="st">&#39;dNBR&#39;</span>)<span class="op">;</span></span>
+<span id="cb51-51"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb51-51" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(burnedAreaMask<span class="op">,</span> {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> <span class="st">&#39;Máscara de Áreas Quemadas&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<hr />
+</div>
+<div id="explicación-del-código-para-el-paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua" class="section level4 hasAnchor" number="3.2.9.4">
+<h4><span class="header-section-number">3.2.9.4</span> Explicación del Código para el Paso 6: Crear una Máscara de Áreas Quemadas (Eliminando Cuerpos de Agua)<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-6-crear-una-máscara-de-áreas-quemadas-eliminando-cuerpos-de-agua" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>1. Identificar los cuerpos de agua con NDWI</strong></p>
+<p>El NDWI (Índice de Diferencia de Agua Normalizada) permite identificar los cuerpos de agua utilizando la relación entre la banda verde (GREEN) y la banda infrarroja cercana (NIR). La fórmula para calcular el NDWI es:</p>
+<p><span class="math display">\[
+NDWI = \frac{(GREEN - NIR)}{(GREEN + NIR)}
+\]</span></p>
+<p>En este caso, se usa la imagen previa al incendio para calcular el NDWI. La banda verde (Nadir_Reflectance_Band4) y la banda NIR (Nadir_Reflectance_Band2) se utilizan para calcular el índice. Los valores de NDWI cercanos a 1 indican agua, mientras que los valores cercanos a -1 corresponden a suelo o vegetación.</p>
+<p><strong>Lo que hace el código:</strong>
+- Calcula el NDWI usando la fórmula.
+- Los valores de NDWI se almacenan en una nueva banda llamada <strong>NDWI</strong>.</p>
+<p><strong>Fragmento de código:</strong></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb52-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-1" tabindex="-1"></a><span class="kw">var</span> ndwi <span class="op">=</span> preFireImage<span class="op">.</span><span class="fu">expression</span>(</span>
+<span id="cb52-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-2" tabindex="-1"></a>  <span class="st">&#39;(GREEN - NIR) / (GREEN + NIR)&#39;</span><span class="op">,</span> </span>
+<span id="cb52-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-3" tabindex="-1"></a>  {</span>
+<span id="cb52-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-4" tabindex="-1"></a>    <span class="st">&#39;GREEN&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band4&#39;</span>)<span class="op">,</span> </span>
+<span id="cb52-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-5" tabindex="-1"></a>    <span class="st">&#39;NIR&#39;</span><span class="op">:</span> preFireImage<span class="op">.</span><span class="fu">select</span>(<span class="st">&#39;Nadir_Reflectance_Band2&#39;</span>) </span>
+<span id="cb52-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-6" tabindex="-1"></a>  }</span>
+<span id="cb52-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb52-7" tabindex="-1"></a>)<span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;NDWI&#39;</span>)<span class="op">;</span> </span></code></pre></div>
+<p><strong>2. Crear una máscara de agua</strong></p>
+<p>Para diferenciar los cuerpos de agua del resto, se aplica un umbral (threshold) al NDWI. Los píxeles con valores de NDWI mayores a <strong>0.2</strong> se consideran agua.</p>
+<p><strong>Lo que hace el código:</strong>
+- Define el umbral de agua en <strong>0.2</strong>.
+- Crea una máscara que identifica los píxeles de agua con un valor de <strong>1</strong> (agua) y el resto con un valor de <strong>0</strong> (no agua).
+- La máscara se llama <strong>Water_Mask</strong>.</p>
+<p><strong>Fragmento de código:</strong></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb53-1" tabindex="-1"></a><span class="kw">var</span> waterThreshold <span class="op">=</span> <span class="fl">0.2</span><span class="op">;</span> </span>
+<span id="cb53-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb53-2" tabindex="-1"></a><span class="kw">var</span> waterMask <span class="op">=</span> ndwi<span class="op">.</span><span class="fu">gt</span>(waterThreshold) </span>
+<span id="cb53-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb53-3" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;Water_Mask&#39;</span>)<span class="op">;</span> </span></code></pre></div>
+<p><strong>3. Eliminar los cuerpos de agua de la máscara de áreas quemadas</strong></p>
+<p>Ahora que se tiene la máscara de agua, se usa para quitar los cuerpos de agua de la máscara de áreas quemadas. Para hacer esto, se excluyen los píxeles de agua de la máscara de áreas quemadas.</p>
+<p><strong>Lo que hace el código:</strong>
+- Usa la función <code>and()</code> para combinar la máscara de áreas quemadas con la máscara de agua invertida.
+- La función <code>waterMask.not()</code> invierte la máscara de agua (los píxeles de agua se convierten en <strong>0</strong> y los demás en <strong>1</strong>).
+- Se combina la máscara de áreas quemadas con la máscara de agua invertida, eliminando los cuerpos de agua de la máscara de áreas quemadas.
+- La nueva máscara se llama <strong>Refined_Burned_Areas</strong>.</p>
+<p><strong>Fragmento de código:</strong></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb54-1" tabindex="-1"></a><span class="kw">var</span> refinedBurnedAreaMask <span class="op">=</span> burnedAreaMask<span class="op">.</span><span class="fu">and</span>(waterMask<span class="op">.</span><span class="fu">not</span>()) </span>
+<span id="cb54-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb54-2" tabindex="-1"></a>  <span class="op">.</span><span class="fu">selfMask</span>() </span>
+<span id="cb54-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb54-3" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">&#39;Refined_Burned_Areas&#39;</span>)<span class="op">;</span> </span></code></pre></div>
+<p><strong>4. Visualizar la máscara refinada</strong></p>
+<p>Se visualiza la máscara de áreas quemadas refinada para comprobar que se han excluido correctamente los cuerpos de agua. También se muestra la máscara de agua para verificar que ambas se visualizan de forma correcta.</p>
+<p><strong>Lo que hace el código:</strong>
+- Muestra la máscara de agua (en azul) para verificar la correcta identificación de los cuerpos de agua.
+- Muestra la máscara de áreas quemadas refinada (en rojo) para ver cómo se excluyeron los cuerpos de agua de la máscara.</p>
+<p><strong>Fragmento de código:</strong></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb55-1" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(waterMask<span class="op">,</span> {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;blue&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> <span class="st">&#39;Máscara de Agua&#39;</span>)<span class="op">;</span></span>
+<span id="cb55-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb55-2" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(refinedBurnedAreaMask<span class="op">,</span> {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> <span class="st">&#39;Máscara de Áreas Quemadas Refinada (sin agua)&#39;</span>)<span class="op">;</span></span></code></pre></div>
+</div>
+</div>
+<div id="paso-7-calcular-la-superficie-total-quemada" class="section level3 hasAnchor" number="3.2.10">
+<h3><span class="header-section-number">3.2.10</span> Paso 7: Calcular la Superficie Total Quemada<a href="análisis-multitemporal-para-la-detección-de-cambios.html#paso-7-calcular-la-superficie-total-quemada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>Quiero calcular la superficie total quemada en Córdoba, Argentina, utilizando la máscara de áreas quemadas que excluye los cuerpos de agua. Necesito que el cálculo se realice en hectáreas (ha). 
+
+Para ello, sigue estos pasos:
+1. Usa la máscara de áreas quemadas refinada (Refined_Burned_Areas) que ya hemos generado.
+2. Calcula la cantidad de píxeles quemados que estén dentro de la región de interés (ROI) de Córdoba.
+3. Convierte esta cantidad de píxeles a hectáreas, considerando el área de cada píxel de MODIS.
+4. Imprime la superficie total quemada en hectáreas.
+5. Proporciona comentarios línea por línea en el código para explicar cada paso.
+</code></pre>
+<blockquote>
+<p><strong>Acción del estudiante</strong>: Copia este prompt en ChatGPT y utiliza la respuesta generada en Google Earth Engine. Verifica si la superficie total quemada se muestra correctamente en hectáreas.</p>
+</blockquote>
+<div id="resultado-esperado-2" class="section level4 hasAnchor" number="3.2.10.1">
+<h4><span class="header-section-number">3.2.10.1</span> Resultado esperado<a href="análisis-multitemporal-para-la-detección-de-cambios.html#resultado-esperado-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-1" tabindex="-1"></a><span class="co">// Paso 7: Calcular la superficie total quemada (en hectáreas) en la región de Córdoba</span></span>
+<span id="cb57-2"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-3" tabindex="-1"></a><span class="co">// 1. Definir la resolución espacial de la imagen MODIS (500 m x 500 m)</span></span>
+<span id="cb57-4"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-4" tabindex="-1"></a><span class="kw">var</span> pixelArea <span class="op">=</span> <span class="dv">500</span> <span class="op">*</span> <span class="dv">500</span><span class="op">;</span> <span class="co">// Cada píxel de MODIS tiene un área de 500m x 500m = 250,000 m²</span></span>
+<span id="cb57-5"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-5" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-6" tabindex="-1"></a><span class="co">// 2. Convertir el área de cada píxel de m² a hectáreas (1 ha = 10,000 m²)</span></span>
+<span id="cb57-7"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-7" tabindex="-1"></a><span class="kw">var</span> pixelAreaHa <span class="op">=</span> pixelArea <span class="op">/</span> <span class="dv">10000</span><span class="op">;</span> <span class="co">// Convertir de metros cuadrados (m²) a hectáreas (ha)</span></span>
+<span id="cb57-8"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-8" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Área de cada píxel en hectáreas:&#39;</span><span class="op">,</span> pixelAreaHa)<span class="op">;</span></span>
+<span id="cb57-9"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-9" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-10" tabindex="-1"></a><span class="co">// 3. Contar la cantidad de píxeles quemados dentro de la región de Córdoba</span></span>
+<span id="cb57-11"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-11" tabindex="-1"></a><span class="kw">var</span> burnedAreaStats <span class="op">=</span> refinedBurnedAreaMask<span class="op">.</span><span class="fu">reduceRegion</span>({</span>
+<span id="cb57-12"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-12" tabindex="-1"></a>  <span class="dt">reducer</span><span class="op">:</span> ee<span class="op">.</span><span class="at">Reducer</span><span class="op">.</span><span class="fu">sum</span>()<span class="op">,</span> <span class="co">// Suma de los píxeles de la máscara (1 = quemado, 0 = no quemado)</span></span>
+<span id="cb57-13"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-13" tabindex="-1"></a>  <span class="dt">geometry</span><span class="op">:</span> cordoba<span class="op">.</span><span class="fu">geometry</span>()<span class="op">,</span> <span class="co">// Limitar el cálculo al área de Córdoba</span></span>
+<span id="cb57-14"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-14" tabindex="-1"></a>  <span class="dt">scale</span><span class="op">:</span> <span class="dv">500</span><span class="op">,</span> <span class="co">// Usar la resolución de la imagen MODIS (500 m)</span></span>
+<span id="cb57-15"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-15" tabindex="-1"></a>  <span class="dt">maxPixels</span><span class="op">:</span> <span class="fl">1e13</span> <span class="co">// Permitir un número máximo de píxeles a procesar</span></span>
+<span id="cb57-16"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-16" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb57-17"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-17" tabindex="-1"></a></span>
+<span id="cb57-18"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-18" tabindex="-1"></a><span class="co">// 4. Extraer la cantidad de píxeles quemados de la operación reduceRegion()</span></span>
+<span id="cb57-19"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-19" tabindex="-1"></a><span class="kw">var</span> burnedPixelCount <span class="op">=</span> ee<span class="op">.</span><span class="fu">Number</span>(burnedAreaStats<span class="op">.</span><span class="fu">get</span>(<span class="st">&#39;Refined_Burned_Areas&#39;</span>))<span class="op">;</span> </span>
+<span id="cb57-20"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-20" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Cantidad de píxeles quemados:&#39;</span><span class="op">,</span> burnedPixelCount)<span class="op">;</span></span>
+<span id="cb57-21"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-21" tabindex="-1"></a></span>
+<span id="cb57-22"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-22" tabindex="-1"></a><span class="co">// 5. Calcular la superficie total quemada en hectáreas</span></span>
+<span id="cb57-23"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-23" tabindex="-1"></a><span class="kw">var</span> burnedAreaHa <span class="op">=</span> burnedPixelCount<span class="op">.</span><span class="fu">multiply</span>(pixelAreaHa)<span class="op">;</span> <span class="co">// Multiplicar el número de píxeles quemados por el área de cada píxel en ha</span></span>
+<span id="cb57-24"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-24" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Superficie total quemada (hectáreas):&#39;</span><span class="op">,</span> burnedAreaHa)<span class="op">;</span></span>
+<span id="cb57-25"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-25" tabindex="-1"></a></span>
+<span id="cb57-26"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-26" tabindex="-1"></a><span class="co">// 6. Visualizar la máscara de áreas quemadas refinada en el mapa</span></span>
+<span id="cb57-27"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-27" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(refinedBurnedAreaMask<span class="op">,</span> </span>
+<span id="cb57-28"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-28" tabindex="-1"></a>  {<span class="dt">palette</span><span class="op">:</span> [<span class="st">&#39;red&#39;</span>]<span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span>}<span class="op">,</span> </span>
+<span id="cb57-29"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-29" tabindex="-1"></a>  <span class="st">&#39;Máscara de Áreas Quemadas Refinada (sin agua)&#39;</span></span>
+<span id="cb57-30"><a href="análisis-multitemporal-para-la-detección-de-cambios.html#cb57-30" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+</div>
+<div id="explicación-del-código-para-el-paso-7-calcular-la-superficie-total-quemada" class="section level4 hasAnchor" number="3.2.10.2">
+<h4><span class="header-section-number">3.2.10.2</span> Explicación del Código para el Paso 7: Calcular la Superficie Total Quemada<a href="análisis-multitemporal-para-la-detección-de-cambios.html#explicación-del-código-para-el-paso-7-calcular-la-superficie-total-quemada" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>En este paso, se calcula la superficie total quemada en hectáreas para la región de Córdoba, excluyendo los cuerpos de agua. Este cálculo se basa en la cantidad de píxeles que cumplen con la condición de área quemada (dNBR &gt; umbral) y la conversión de esta cantidad de píxeles a hectáreas.</p>
+<p><strong>1. Definir el área de un píxel en hectáreas</strong><br />
+Cada píxel de la imagen MODIS tiene una resolución de 500 x 500 metros, lo que equivale a 250,000 m² por píxel. Para convertir esta superficie a hectáreas, se utiliza la conversión estándar de 1 hectárea = 10,000 m².<br />
+Fórmula:<br />
+<span class="math display">\[
+\text{Área del píxel en hectáreas} = \frac{500 \times 500}{10,000} = 25 \, \text{ha}
+\]</span>
+Este valor se utiliza más adelante para calcular la superficie total quemada.</p>
+<p><strong>2. Contar los píxeles quemados en la región de Córdoba</strong><br />
+Para determinar cuántos píxeles representan áreas quemadas, se utiliza la función <code>reduceRegion()</code>. Esta función aplica un reductor, en este caso <code>ee.Reducer.sum()</code>, que suma todos los píxeles que cumplen con la condición de área quemada (es decir, aquellos con un valor de 1 en la máscara <code>Refined_Burned_Areas</code>).<br />
+La operación se limita a la región de interés (ROI) de Córdoba para evitar contar píxeles fuera del área de estudio.<br />
+Parámetros importantes de <code>reduceRegion()</code>:
+- <strong>reducer</strong>: Suma los valores de los píxeles dentro de la región de Córdoba.
+- <strong>geometry</strong>: Define la región de Córdoba para limitar el área de análisis.
+- <strong>scale</strong>: Define la escala de los datos (500 m en el caso de MODIS).
+- <strong>maxPixels</strong>: Establece la cantidad máxima de píxeles que se permite procesar para evitar errores de límite de píxeles.</p>
+<p>El resultado de <code>reduceRegion()</code> es un objeto con la suma de los píxeles, que se almacena en la variable <code>burnedPixelCount</code>.</p>
+<p><strong>3. Calcular la superficie total quemada</strong><br />
+Para calcular la superficie quemada, se multiplica la cantidad de píxeles quemados (<code>burnedPixelCount</code>) por el área de cada píxel en hectáreas (<code>pixelAreaHa</code>), previamente calculado.<br />
+Fórmula:<br />
+<span class="math display">\[
+\text{Superficie quemada (ha)} = \text{Cantidad de píxeles quemados} \times \text{Área del píxel (ha)}
+\]</span>
+Este resultado se imprime en la consola de Google Earth Engine para que el usuario pueda ver la superficie total quemada.</p>
+<p><strong>4. Visualizar la máscara de áreas quemadas refinada</strong><br />
+Finalmente, se visualiza la máscara de áreas quemadas en el mapa. Esta máscara muestra en color rojo las áreas que se consideran quemadas. Este paso permite al usuario verificar visualmente que las áreas quemadas se encuentran correctamente delimitadas en la región de Córdoba.<br />
+El mapa ayuda a confirmar que las áreas de agua han sido correctamente excluidas y que la superficie quemada se ha calculado adecuadamente.</p>
+<div class="blackbox">
+<div class="center">
+<p><strong>Resultado</strong></p>
+</div>
+<p>Cantidad de píxeles quemados: 8307</p>
+<p>Superficie total quemada (hectáreas): 207.696</p>
+</div>
+<p>La imagen <a href="análisis-multitemporal-para-la-detección-de-cambios.html#fig:area-quemada">3.1</a> muestra la mascara final con las áreas quemadas. Compara este resultado con el artículo de wikipedia y saca conclusiones.</p>
+<div class="figure"><span style="display:block;" id="fig:area-quemada"></span>
+<img src="figuras/resultado_area_quemada.png" alt="Interfaz principal de Google Earth Engine." width="100%" />
+<p class="caption">
+Figure 3.1: Interfaz principal de Google Earth Engine.
+</p>
+</div>
+</div>
+</div>
+<div id="preguntas-al-lector-1" class="section level3 hasAnchor" number="3.2.11">
+<h3><span class="header-section-number">3.2.11</span> Preguntas al lector<a href="análisis-multitemporal-para-la-detección-de-cambios.html#preguntas-al-lector-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p> Responde las preguntas a continuación y al finalizar haz clic en Submit. Luego revisa el score para ver si las respuesta fueron correctas</p>
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXBdiHSKDk-scTQYurstMJCN6NoRtuJITlDVWmFkhyYFaVIQ/viewform?embedded=true" width="800" height="1000" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<hr />
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introducción.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
