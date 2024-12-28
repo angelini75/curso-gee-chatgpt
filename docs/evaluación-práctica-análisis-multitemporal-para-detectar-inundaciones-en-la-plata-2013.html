@@ -26,7 +26,7 @@ con la asistencia de ChatGPT para la generación y optimización de scripts en J
 <meta name="author" content="Dr. Marcos E. Angelini" />
 
 
-<meta name="date" content="2024-12-21" />
+<meta name="date" content="2024-12-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,8 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#objetivo-1"><i class="fa fa-check"></i><b>4.1</b> Objetivo:</a></li>
 <li class="chapter" data-level="4.2" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#requisitos-para-la-entrega"><i class="fa fa-check"></i><b>4.2</b> Requisitos para la entrega:</a></li>
 <li class="chapter" data-level="4.3" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#instrucciones"><i class="fa fa-check"></i><b>4.3</b> Instrucciones:</a></li>
-<li class="chapter" data-level="4.4" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#entregables"><i class="fa fa-check"></i><b>4.4</b> Entregables:</a></li>
-<li class="chapter" data-level="4.5" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#criterios-de-evaluación"><i class="fa fa-check"></i><b>4.5</b> Criterios de evaluación:</a></li>
+<li class="chapter" data-level="4.4" data-path="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html"><a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#criterios-de-evaluación"><i class="fa fa-check"></i><b>4.4</b> Criterios de evaluación:</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/angelini75/curso-gee-chatgpt" target="blank">Publicado con Bookdown</a></li>
@@ -240,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="objetivo-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Objetivo:<a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#objetivo-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los estudiantes deben realizar un análisis multitemporal en <strong>Google Earth Engine (GEE)</strong> para identificar las áreas afectadas por las inundaciones en La Plata durante abril de 2013, utilizando imágenes satelitales y técnicas de teledetección.</p>
+<p><a href="https://es.wikipedia.org/wiki/Inundaci%C3%B3n_en_La_Plata_de_2013" class="uri">https://es.wikipedia.org/wiki/Inundaci%C3%B3n_en_La_Plata_de_2013</a></p>
 <hr />
 <iframe width="100%" height="400"
   src="https://es.wikipedia.org/wiki/Inundaci%C3%B3n_en_La_Plata_de_2013"
@@ -260,16 +260,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><strong>Definir la región de interés (ROI)</strong>
 <ul>
-<li>Define la región correspondiente a La Plata y sus alrededores usando la colección de límites administrativos (por ejemplo, FAO/GAUL o GADM).</li>
+<li>Define la región correspondiente a La Plata y sus alrededores, por ejemplo usando la colección de límites administrativos o bien a partir de un polígono.</li>
 <li>Visualiza la región en el mapa para verificar que está correctamente delimitada.</li>
 </ul></li>
 <li><strong>Seleccionar las imágenes satelitales</strong>
 <ul>
-<li>Usa la colección de imágenes Landsat 7.</li>
+<li>Usa la colección de imágenes disponible que mejor se adecue al evento (Landsat, MODIS, etc.).</li>
 <li>Filtra las imágenes para dos períodos:
 <ul>
 <li>Antes del evento (marzo 2013).</li>
-<li>Durante o después del evento (abril 2013).</li>
+<li>Durante o inmediatamente después del evento (abril 2013).</li>
 </ul></li>
 </ul></li>
 <li><strong>Preprocesamiento</strong>
@@ -299,29 +299,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <hr />
 </div>
-<div id="entregables" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Entregables:<a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#entregables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ol style="list-style-type: decimal">
-<li><strong>Código comentado</strong><br />
-Subir un archivo con el script de GEE, claramente comentado.</li>
-<li><strong>Visualizaciones</strong><br />
-Adjuntar capturas de pantalla que muestren:
-<ul>
-<li>Región de interés (La Plata).</li>
-<li>Cambios en el índice entre períodos.</li>
-<li>Mapa final de áreas inundadas.</li>
-</ul></li>
-<li><strong>Informe breve</strong>
-<ul>
-<li>Resumen de los pasos realizados.</li>
-<li>Superficie total afectada por las inundaciones (en hectáreas).</li>
-<li>Limitaciones del análisis y sugerencias para futuros estudios.</li>
-</ul></li>
-</ol>
-<hr />
-</div>
-<div id="criterios-de-evaluación" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Criterios de evaluación:<a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#criterios-de-evaluación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="criterios-de-evaluación" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Criterios de evaluación:<a href="evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-plata-2013.html#criterios-de-evaluación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><strong>Corrección del código</strong> (40%): Uso adecuado de las funciones de GEE y estructura lógica del script.</li>
 <li><strong>Interpretación de resultados</strong> (30%): Calidad de las visualizaciones y explicación de los resultados.</li>

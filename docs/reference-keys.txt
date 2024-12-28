@@ -104,5 +104,4 @@ evaluación-práctica-análisis-multitemporal-para-detectar-inundaciones-en-la-p
 objetivo-1
 requisitos-para-la-entrega
 instrucciones
-entregables
 criterios-de-evaluación

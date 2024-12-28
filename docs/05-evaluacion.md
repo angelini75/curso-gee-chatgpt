@@ -3,6 +3,8 @@
 ## Objetivo:
 Los estudiantes deben realizar un análisis multitemporal en **Google Earth Engine (GEE)** para identificar las áreas afectadas por las inundaciones en La Plata durante abril de 2013, utilizando imágenes satelitales y técnicas de teledetección.
 
+https://es.wikipedia.org/wiki/Inundaci%C3%B3n_en_La_Plata_de_2013
+
 ---
 
 ```{=html}
@@ -21,14 +23,14 @@ Los estudiantes deben realizar un análisis multitemporal en **Google Earth Engi
 
 ## Instrucciones:
 1. **Definir la región de interés (ROI)**  
-   - Define la región correspondiente a La Plata y sus alrededores usando la colección de límites administrativos (por ejemplo, FAO/GAUL o GADM).
+   - Define la región correspondiente a La Plata y sus alrededores, por ejemplo usando la colección de límites administrativos o bien a partir de un polígono.
    - Visualiza la región en el mapa para verificar que está correctamente delimitada.
 
 2. **Seleccionar las imágenes satelitales**  
-   - Usa la colección de imágenes Landsat 7.
+   - Usa la colección de imágenes disponible que mejor se adecue al evento (Landsat, MODIS, etc.).
    - Filtra las imágenes para dos períodos: 
      - Antes del evento (marzo 2013).
-     - Durante o después del evento (abril 2013).
+     - Durante o inmediatamente después del evento (abril 2013).
 
 3. **Preprocesamiento**  
    - Aplica filtros de nubosidad y recorta las imágenes a la región de interés.
@@ -48,21 +50,6 @@ Los estudiantes deben realizar un análisis multitemporal en **Google Earth Engi
 7. **Visualizar y exportar los resultados**  
    - Visualiza las áreas inundadas en el mapa con una paleta de colores distintiva.
    - Exporta los resultados (imágenes procesadas o shapefiles) a Google Drive o al sistema local.
-
----
-
-## Entregables:
-1. **Código comentado**  
-   Subir un archivo con el script de GEE, claramente comentado.
-2. **Visualizaciones**  
-   Adjuntar capturas de pantalla que muestren:
-   - Región de interés (La Plata).
-   - Cambios en el índice entre períodos.
-   - Mapa final de áreas inundadas.
-3. **Informe breve**  
-   - Resumen de los pasos realizados.
-   - Superficie total afectada por las inundaciones (en hectáreas).
-   - Limitaciones del análisis y sugerencias para futuros estudios.
 
 ---
 

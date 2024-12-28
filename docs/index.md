@@ -1,7 +1,7 @@
 ---
 title: "Uso de Google Earth Engine asistido por ChatGPT para gestión de Recursos Naturales"
 author: "Dr. Marcos E. Angelini"
-date: "2024-12-21"
+date: "2024-12-28"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
